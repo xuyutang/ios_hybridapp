@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repo/winetone/!svn/ver/31046/trunk/telecom/ios_hybridapp/HybridApp/Source/Helper
+END
+JSBridge.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repo/winetone/!svn/ver/31001/trunk/telecom/ios_hybridapp/HybridApp/Source/Helper/JSBridge.h
+END
+LocalHelper.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/repo/winetone/!svn/ver/31001/trunk/telecom/ios_hybridapp/HybridApp/Source/Helper/LocalHelper.h
+END
+PromotationHelper.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/repo/winetone/!svn/ver/31001/trunk/telecom/ios_hybridapp/HybridApp/Source/Helper/PromotationHelper.h
+END
+HttpRequestHelper.m
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Helper/HttpRequestHelper.m
+END
+LocationHelper.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/repo/winetone/!svn/ver/31046/trunk/telecom/ios_hybridapp/HybridApp/Source/Helper/LocationHelper.m
+END
+JSBridge.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repo/winetone/!svn/ver/31001/trunk/telecom/ios_hybridapp/HybridApp/Source/Helper/JSBridge.m
+END
+FileHelper.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Helper/FileHelper.h
+END
+LocalHelper.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/repo/winetone/!svn/ver/31001/trunk/telecom/ios_hybridapp/HybridApp/Source/Helper/LocalHelper.m
+END
+PromotationHelper.m
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/repo/winetone/!svn/ver/31001/trunk/telecom/ios_hybridapp/HybridApp/Source/Helper/PromotationHelper.m
+END
+FileHelper.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Helper/FileHelper.m
+END
+HttpRequestHelper.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Helper/HttpRequestHelper.h
+END
+LocationHelper.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/repo/winetone/!svn/ver/31001/trunk/telecom/ios_hybridapp/HybridApp/Source/Helper/LocationHelper.h
+END

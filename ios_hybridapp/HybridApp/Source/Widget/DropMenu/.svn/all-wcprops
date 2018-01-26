@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/repo/winetone/!svn/ver/31039/trunk/telecom/ios_hybridapp/HybridApp/Source/Widget/DropMenu
+END
+DropMenu.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/repo/winetone/!svn/ver/31001/trunk/telecom/ios_hybridapp/HybridApp/Source/Widget/DropMenu/DropMenu.h
+END
+JGPopView.h
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/repo/winetone/!svn/ver/31037/trunk/telecom/ios_hybridapp/HybridApp/Source/Widget/DropMenu/JGPopView.h
+END
+SingleDropMenu.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/repo/winetone/!svn/ver/31001/trunk/telecom/ios_hybridapp/HybridApp/Source/Widget/DropMenu/SingleDropMenu.h
+END
+DropMenu.m
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/repo/winetone/!svn/ver/31006/trunk/telecom/ios_hybridapp/HybridApp/Source/Widget/DropMenu/DropMenu.m
+END
+JGPopView.m
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/repo/winetone/!svn/ver/31039/trunk/telecom/ios_hybridapp/HybridApp/Source/Widget/DropMenu/JGPopView.m
+END
+SingleDropMenu.m
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/repo/winetone/!svn/ver/31006/trunk/telecom/ios_hybridapp/HybridApp/Source/Widget/DropMenu/SingleDropMenu.m
+END

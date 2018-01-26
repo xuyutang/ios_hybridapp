@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/> <!-- 是否启用 WebApp 全屏模式 -->
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="format-detection" content="telephone=no">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <link rel="stylesheet" href="css/weui.min.css">
+	<link rel="stylesheet" href="css/jquery-weui.min.css">
+    <link rel="stylesheet" href="fonts/iconfont.css">
+    <link rel="stylesheet" href="css/style.css">
+<style>
+#imgList img{ width:75px;height:75px;margin-right:5px;float:left; }
+</style>
+</head>
+<body>
+<form id="myFormId">
+<div class="weui-cells__title">工作内容</div>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <textarea class="weui-textarea" placeholder="请输入文本" rows="5" id="content" name="content" maxlength="500"></textarea>
+            <div class="weui-textarea-counter"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="weui-cells__title">特殊问题</div>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <textarea class="weui-textarea" placeholder="请输入文本" rows="5" name="problem" maxlength="500"></textarea>
+            <div class="weui-textarea-counter"></div>
+        </div>
+    </div>
+</div>
+
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title">现场照片</p>
+                </div>
+                <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files" id="imgList">
+					<li class="weui-uploader__file p-relative">
+						<img src="http://b.hiphotos.baidu.com/image/h%3D300/sign=db34bde9b97eca800d053fe7a1229712/5fdf8db1cb1349546006f3ae5f4e9258d0094adb.jpg" v="" onclick="viewImage(this)">
+						<span class="toTrash"><i class="iconfont icon-lajitong1 m-r-0"></i></span>
+					</li>
+                    </ul>
+                    <div class="weui-uploader__input-box">
+
+                        <div id="addImage" class="weui-uploader__input"  accept="image/*" multiple=""></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box-content" style="padding-bottom: 18px;">
+        <div class="weui-cells weui-cells_form"  style="margin-top: 0;">
+            <div class="weui-cell" id="selectPrice">
+                <div class="weui-cell__hd"><label class="weui-label" >零售价</label></div>
+                <div class="weui-cell__bd">
+                    <input id="inputPrice" class="weui-input" type="number" pattern="[0-9]*" placeholder="请填写零售价">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">日期时间</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="date-format" type="text" value="选择日期" readonly="" style="text-align: right">
+                    <input class="weui-input" id="time-format" type="text" value="选择时间" readonly="" style="text-align: right">
+                    <input class="weui-input" id="calendar-format" type="text" value="选择日历" readonly="" style="text-align: right">
+                </div>
+            </div>
+            <div class="weui-cell">
+
+                <div class="weui-cell__hd"><label class="weui-label">地址</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="address2">
+                </div>
+            </div>
+            <div class="weui-cell">
+
+                <div class="weui-cell__hd"><label class="weui-label">选择银行</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="bankname">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">特殊问题</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入文本" rows="5" name="problem1" maxlength="500"></textarea>
+                <div class="weui-textarea-counter"></div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-weui.min.js"></script>
+<script src="js/appclient.js"></script>
+<script>
+function onPageFinished(){
+    App.setTitle("添加日志");
+    App.dragRefresh();
+    App.setTopMenu([{"name":"保存","callback":"saveForm()"}]);
+}
+</script>
+
+<script src="js/validateEngine.js"></script>
+<script src="js/validatejs/workLog.js"></script>
+<script src="js/area.js"></script>
+<script>
+var count = 0;
+function saveForm(){
+   if(!$("#myFormId").validateForm(saveWorkLogConfig)) {
+		return;
+	}
+	var postUrl = 'http://192.168.1.166:8080/telecom_mobile/bin.io';
+    App.showLoading();
+	App.postData(postUrl,'/worklog/save',"{callback:'saveCallback'}","{today:'今天内容测试',tormmorw:'明日计划'}","[{fieldName:'photo1',items:[{type:'jpg',file:'/data/11.jpg'},{type:'video',file:'/data/11.mp4'}]},{fieldName:'photo2',items:[{type:'jpg',file:'/data/22.jpg'},{type:'video',file:'/data/23.mp4'}]}]");
+
+    /*if (count%2 == 0)
+    {
+        setTimeout("App.hideLoading();",3000);
+    } else {
+        App.hideLoading();
+
+        App.alert("保存成功");
+    }
+    count++;*/
+}
+
+function saveCallback(response){
+  App.hideLoading();
+ if('200' == response){
+   //App.alert(response);
+   App.prompt("保存成功");
+ }else{
+ App.prompt("请求失败");
+ }
+}
+
+$(document).ready(function(){
+
+        $("#myFormId").validate(saveWorkLogConfig);
+
+        //图片选择
+        $("#addImage").click(function(){
+            App.selectImg({"callback":"setImage","params":{"srcType":"SysCamera","cropWith":"300","cropHeight":"300","autoCrop":"true"}});
+        });
+
+
+
+
+
+		$("#imgList").on("click", "li span", function(){
+        window.webkit.messageHandlers.remove.postMessage('remove');
+
+          //  $(this).parent().remove();
+        });
+		
+        
+    });
+
+
+
+function setImage(value) {
+    var img=   '<li class="weui-uploader__file p-relative newImg">'
+                +    '<img src="'+value+'" v="" onclick="viewImage(this)">'
+                +    '<span class="toTrash"><i class="iconfont icon-lajitong1 m-r-0"></i></span>'
+                +'</li>';
+    //读取文件内容，(Base64编码后的，保存至服务器时需要解码后存成图片文件)    
+    //'data:image/jpeg;base64, EDKSD002834DKKFJFHFJ......     
+    $(img).appendTo("#imgList");
+}
+
+
+
+
+function onPageEnd(){}
+function onResume(){
+    if (App.get("imgs") != null)
+    {
+        var imgs = App.get("imgs");
+		$("#imgList").empty();
+        $(imgs).appendTo("#imgList");
+		App.remove("imgs");
+     }
+}
+
+function onSaveState(){
+    App.put("imgs", $("#imgList").html());
+}
+
+
+</script>
+</body>
+</html>

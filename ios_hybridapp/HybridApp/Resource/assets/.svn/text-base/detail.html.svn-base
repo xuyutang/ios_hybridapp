@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AC奢侈品</title>
+    <meta name="viewport"
+          content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/> <!-- 是否启用 WebApp 全屏模式 -->
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="format-detection" content="telephone=no">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <link rel="stylesheet" href="css/weui.min.css">
+    <link rel="stylesheet" href="css/jquery-weui.min.css">
+    <link rel="stylesheet" href="fonts/iconfont.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+img{margin-left:10%;width:80%;align:center;}
+
+    </style>
+
+</head>
+<body>
+<div class="box">
+    <div class="weui-cells" id="content">
+        <a id="1" class="weui-cell weui-cell_access"
+           href="javascript:App.openNew(base+'/detail.html')">
+            <div class="weui-cell__bd p-l-50">
+                <p class="f16 f333">2017-11-01工作日志</p>
+
+                <p class="f12 f999 three-h p-t-6"><span class="f666">工作内容：</span>解决了一些难点存在问题</p>
+
+                <p class="f12 f999 three-h p-t-6"><span class="f666">存在问题：</span>视频播放还存在个别难点需要解决</p>
+
+            </div>
+        </a>
+        <div style="text-align:right;">
+            <button style="width:100px;height:30px;margin:10px;" onclick="setMenu();">设置顶部菜单
+            </button>
+        </div>
+
+        <img src="/images/img.jpg" v="" onclick="viewImage(this);"/>
+        <img src="/images/img.jpg" v="" onclick="viewImage(this);"/>
+        <img src="/images/img.jpg" v="" onclick="viewImage(this);"/>
+
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-weui.min.js"></script>
+<script src="js/appclient.js"></script>
+<script>
+function onPageFinished(){
+    App.setTitle("查看日志");
+
+    //允许下拉刷新
+    App.dragRefresh();
+
+    App.setTopMenu([{"name":"删除","callback":"confirmDel()"}]);
+
+    //设置变量
+    App.put("logName", "测试日志");
+}
+function confirmDel(){
+App.confirm({"message":"确定删除？","callback":"deleteLog(\"1\")"});
+}
+
+</script>
+
+
+<script>
+function setMenu(){
+	App.setTopMenu([{"name":"提交1","callback":"menuCallback()"},{"name":"提交2","callback":"menuCallback()"},{"name":"提交3","callback":"menuCallback()"}]);
+}
+function menuCallback(){
+App.prompt('提交成功')
+}
+function deleteLog(val){
+    App.prompt("删除成功");
+}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/ALBBRpcPlugin.framework/Headers
+END
+CCPRequestOperation.h
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/ALBBRpcPlugin.framework/Headers/CCPRequestOperation.h
+END
+CCPURLRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/ALBBRpcPlugin.framework/Headers/CCPURLRequest.h
+END
+ALBBRpc.h
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/ALBBRpcPlugin.framework/Headers/ALBBRpc.h
+END
+ALBBRpcService.h
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/ALBBRpcPlugin.framework/Headers/ALBBRpcService.h
+END
+ALBBRpcProtocol.h
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/ALBBRpcPlugin.framework/Headers/ALBBRpcProtocol.h
+END
+CCPURLResponse.h
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/ALBBRpcPlugin.framework/Headers/CCPURLResponse.h
+END

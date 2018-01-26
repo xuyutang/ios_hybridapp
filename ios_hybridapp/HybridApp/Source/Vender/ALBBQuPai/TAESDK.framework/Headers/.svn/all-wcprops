@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/TAESDK.framework/Headers
+END
+TaeTest.h
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/TAESDK.framework/Headers/TaeTest.h
+END
+TaeSDK.h
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/TAESDK.framework/Headers/TaeSDK.h
+END
+TaeTopClient.h
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/TAESDK.framework/Headers/TaeTopClient.h
+END
+ALILocationDefines.h
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/TAESDK.framework/Headers/ALILocationDefines.h
+END
+ALILocationService.h
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/TAESDK.framework/Headers/ALILocationService.h
+END
+TaeWebViewUISettings.h
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/TAESDK.framework/Headers/TaeWebViewUISettings.h
+END

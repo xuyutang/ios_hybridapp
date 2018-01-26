@@ -1,0 +1,36 @@
+//
+//  HybridAppPrefixHeader.pch
+//  HybridApp
+//
+//  Created by lzhang@juicyshare.cc on 2018/1/22.
+//  Copyright © 2018年 Juicyshare Co.,Ltd. All rights reserved.
+//
+
+#ifndef HybridAppPrefixHeader_pch
+#define HybridAppPrefixHeader_pch
+
+#import <Availability.h>
+
+#ifndef __IPHONE_4_0
+#warning "This project uses features only available in iOS SDK 4.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#endif
+
+#ifndef __OPTIMIZE__
+#    define NSLog(...) NSLog(__VA_ARGS__)
+#ifdef DEBUG
+#   define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define DLog(...)
+#endif
+#else
+#    define NSLog(...) {}
+#endif
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* HybridAppPrefixHeader_pch */

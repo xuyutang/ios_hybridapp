@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/SecurityGuardSDK.framework/Versions/A/Headers/JAQ
+END
+SecuritySignature.h
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/SecurityGuardSDK.framework/Versions/A/Headers/JAQ/SecuritySignature.h
+END
+SecurityStorage.h
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/SecurityGuardSDK.framework/Versions/A/Headers/JAQ/SecurityStorage.h
+END
+SecurityCipher.h
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/SecurityGuardSDK.framework/Versions/A/Headers/JAQ/SecurityCipher.h
+END

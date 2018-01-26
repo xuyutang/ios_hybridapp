@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/> <!-- 是否启用 WebApp 全屏模式 -->
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="format-detection" content="telephone=no">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <link rel="stylesheet" href="css/weui.min.css">
+    <link rel="stylesheet" href="css/jquery-weui.min.css">
+    <link rel="stylesheet" href="fonts/iconfont.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+<div class="weui-cells" id="content">
+    <a id="1" class="weui-cell weui-cell_access" href="javascript:App.openNew(base+'/detail.html')">
+        <div class="weui-cell__bd p-l-50">
+            <p class="f16 f333">2017-11-01工作日志</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">工作内容：</span>解决了一些难点存在问题</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">存在问题：</span>视频播放还存在个别难点需要解决</p>
+
+        </div>
+    </a>
+    <a id="2" class="weui-cell weui-cell_access" href="javascript:App.openNew(base+'/detail.html')">
+        <div class="weui-cell__bd p-l-50">
+            <p class="f16 f333">2017-11-02工作日志</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">工作内容：</span>解决了一些难点存在问题</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">存在问题：</span>视频播放还存在个别难点需要解决</p>
+        </div>
+    </a>
+    <a id="3" class="weui-cell weui-cell_access" href="javascript:App.openNew(base+'/detail.html')">
+        <div class="weui-cell__bd p-l-50">
+            <p class="f16 f333">2017-11-03工作日志</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">工作内容：</span>解决了一些难点存在问题</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">存在问题：</span>视频播放还存在个别难点需要解决</p>
+        </div>
+    </a>
+    <a id="4" class="weui-cell weui-cell_access" href="javascript:App.openNew(base+'/detail.html')">
+        <div class="weui-cell__bd p-l-50">
+            <p class="f16 f333">2017-11-04工作日志</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">工作内容：</span>解决了一些难点存在问题</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">存在问题：</span>视频播放还存在个别难点需要解决</p>
+        </div>
+    </a>
+    <a id="5" class="weui-cell weui-cell_access" href="javascript:App.openNew(base+'/detail.html')">
+        <div class="weui-cell__bd p-l-50">
+            <p class="f16 f333">2017-11-05工作日志</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">工作内容：</span>解决了一些难点存在问题</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">存在问题：</span>视频播放还存在个别难点需要解决</p>
+        </div>
+    </a>
+    <a id="6" class="weui-cell weui-cell_access" href="javascript:App.openNew(base+'/detail.html')">
+        <div class="weui-cell__bd p-l-50">
+            <p class="f16 f333">2017-11-06工作日志</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">工作内容：</span>解决了一些难点存在问题</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">存在问题：</span>视频播放还存在个别难点需要解决</p>
+        </div>
+    </a>
+    <a id="7" class="weui-cell weui-cell_access" href="javascript:App.openNew(base+'/detail.html')">
+        <div class="weui-cell__bd p-l-50">
+            <p class="f16 f333">2017-11-07工作日志</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">工作内容：</span>解决了一些难点存在问题</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">存在问题：</span>视频播放还存在个别难点需要解决</p>
+        </div>
+    </a>
+    <a id="8" class="weui-cell weui-cell_access" href="javascript:App.openNew(base+'/detail.html')">
+        <div class="weui-cell__bd p-l-50">
+            <p class="f16 f333">2017-11-08工作日志</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">工作内容：</span>解决了一些难点存在问题</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">存在问题：</span>视频播放还存在个别难点需要解决</p>
+        </div>
+    </a>
+    <a id="9" class="weui-cell weui-cell_access" href="javascript:App.openNew(base+'/detail.html')">
+        <div class="weui-cell__bd p-l-50">
+            <p class="f16 f333">2017-11-09工作日志</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">工作内容：</span>解决了一些难点存在问题</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">存在问题：</span>视频播放还存在个别难点需要解决</p>
+        </div>
+    </a>
+    <a id="10" class="weui-cell weui-cell_access" href="javascript:App.openNew(base+'/detail.html')">
+        <div class="weui-cell__bd p-l-50">
+            <p class="f16 f333">2017-11-10工作日志</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">工作内容：</span>解决了一些难点存在问题</p>
+
+            <p class="f12 f999 three-h p-t-6"><span class="f666">存在问题：</span>视频播放还存在个别难点需要解决</p>
+        </div>
+    </a>
+</div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-weui.min.js"></script>
+<script src="js/appclient.js"></script>
+<script>
+function onPageFinished(){
+    //设置标题
+    App.setTitle("工作日志");
+
+    //允许下拉刷新
+    App.dragRefresh();
+
+
+    //设置顶部右侧菜单
+    App.setTopMenu([{"name":"刷新","callback":"refreshPage()"},{"name":"关闭","callback":"closeForResult()"},{"name":"操作","icon":"setting","callback":"fun2()"}]);
+
+    //设置底部Tab功能
+   var footer = new Array();
+   footer[0]={"name":"管理", "defaultIcon":"1", "activeIcon":"1_", "url":base+"/index.html"};
+   footer[1]={"name":"新建", "defaultIcon":"2", "activeIcon":"2_", "url":base+"/add.html"};
+
+    App.setFootMenu(footer);
+
+      //设置底部Tab徽章
+    //var badge = 10;
+    //App.setBottomBadge(0, 10);
+    App.setBottomBadge(1, 83);
+
+
+    //设置中部Tab页切换
+    var config = [{"callback":"regionChange","viewType":"REGION_VIEW","label":"区域"},{"callback":"departmentChange","viewType":"TREE_VIEW","label":"部门"},{"callback":"listChange","viewType":"LIST_VIEW","label":"客户类型", "viewFieldList":[ {"name":"customerType","label":"签约客户1","value":"1"},{"name":"customerType","label":"签约客户2","value":"2"},{"name":"customerType","label":"签约客户3","value":"3"},{"name":"customerType","label":"签约客户4","value":"4"}]},{"callback":"complexChange","viewType":"COMPLEX_VIEW","label":"筛选","viewFieldList":[{"name":"customerName","label":"客户姓名","type":"TEXT"},{"name":"postDate","label":"上报日期","type":"DATE"},{"name":"postcount","label":"签约金额","type":"DIGITAL"}]}];
+    App.setNavigator(config);
+}
+
+function closeForResult(){
+   var config = {"callback":"onPageResult","params":{"customerId":"153","customerName":"安港大酒店"}};
+   App.closeForResult(config);
+}
+</script>
+
+<script>
+function regionChange(callBackValue){
+App.prompt(JSON.stringify(callBackValue));
+}
+function listChange(callBackValue){
+     App.prompt(JSON.stringify(callBackValue));
+}
+
+function departmentChange(callBackValue){
+     App.prompt(JSON.stringify(callBackValue));
+}
+
+function complexChange(callBackValue){
+     App.prompt(JSON.stringify(callBackValue));
+}
+
+function refreshPage(){location.reload();}
+
+function addPage(){
+    App.openNew(base+'/add.html');
+}
+
+function fun1(){
+    App.prompt('设置');
+}
+
+function fun2(){
+    App.actions([
+            {name:"拨打电话",callback:"App.dial('18919648888');"},
+            {name:"生成二维码",callback:"App.show2dCode('http://www.baidu.com');"}
+        ]);
+}
+
+function setDate1(value){
+     App.prompt(value);
+}
+
+function setDate2(value){
+     App.prompt(value);
+}
+
+
+function removeItem(id){
+    $("#"+id).remove();
+}
+
+var count = 0;
+//滚动条划到底部时触发调用(如实现延迟加载)
+function onPageEnd(){
+    if (count == 10)
+    {
+        App.prompt('没有更多了');
+        return;
+    }
+
+    for(var i = 1;i <= 5; i++)
+    {
+        $('<a id="'+(10+count + i)+'" class="weui-cell weui-cell_access" href="javascript:App.openNew(base+\'/detail.html\')">'+
+            '<div class="weui-cell__bd p-l-50">'+
+                '<p class="f16 f333">2017-11-'+(10+count + i)+'工作日志</p>    '+
+                '<p class="f12 f999 three-h p-t-6"><span class="f666">工作内容：</span>解决了一些难点存在问题</p>    '+
+                '<p class="f12 f999 three-h p-t-6"><span class="f666">存在问题：</span>视频播放还存在个别难点需要解决</p>'+
+            '</div>'+
+        '</a>').appendTo("#content");
+    }
+    count += 5;
+}
+
+
+function onResume(){
+    if (App.get("logName")){//读取变量
+        App.prompt(App.get("logName"));
+        //删除变量
+        App.remove("logName");
+    }
+}
+
+</script>
+</body>
+</html>
