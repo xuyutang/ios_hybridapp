@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 76
-/repo/winetone/!svn/ver/31037/trunk/telecom/ios_hybridapp/HybridApp/Resource
+/repo/winetone/!svn/ver/31415/trunk/telecom/ios_hybridapp/HybridApp/Resource
 END
 promotion.plist
 K 25
@@ -14,28 +14,4 @@ K 25
 svn:wc:ra_dav:version-url
 V 87
 /repo/winetone/!svn/ver/30985/trunk/telecom/ios_hybridapp/HybridApp/Resource/city_v2.db
-END
-iPhone-X.jpg
-K 25
-svn:wc:ra_dav:version-url
-V 89
-/repo/winetone/!svn/ver/31020/trunk/telecom/ios_hybridapp/HybridApp/Resource/iPhone-X.jpg
-END
-set@2x.png
-K 25
-svn:wc:ra_dav:version-url
-V 87
-/repo/winetone/!svn/ver/31037/trunk/telecom/ios_hybridapp/HybridApp/Resource/set@2x.png
-END
-set@3x.png
-K 25
-svn:wc:ra_dav:version-url
-V 87
-/repo/winetone/!svn/ver/31037/trunk/telecom/ios_hybridapp/HybridApp/Resource/set@3x.png
-END
-newback.png
-K 25
-svn:wc:ra_dav:version-url
-V 88
-/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Resource/newback.png
 END

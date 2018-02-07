@@ -12,6 +12,9 @@
 #import "DataOutputStream.h"
 #import "DataInputStream.h"
 #import "ProductConstant.h"
+#import "AppSessionResponseModel.h"
+#import "MJExtension.h"
+#import "MBProgressHUD+Util.h"
 
 @implementation HttpRequestHelper
 
@@ -135,17 +138,31 @@
       //  [crb setResultMessage:NSLocalizedString(@"server_bad_error", nil)];
         return;
     }
+    if (!responseData.length) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didFailWithError:)]) {
+            [self.delegate didFailWithError:nil];
+        }
+        return;
+    }
     DataInputStream* inputStream = [DataInputStream dataInputStreamWithData:responseData];
     NSData* d = [inputStream readData];
 //    //解密返回数据
 //    decryptData = [d AES256DecryptedDataWithKey:[APP_KEY substringToIndex:16] iv:IV_KEY];
     AppSessionResponse* cr = [AppSessionResponse parseFromData:d];
+    
+    //组装返回的AppSessionResponse 对象
+    AppSessionResponseModel *responseModel = [[AppSessionResponseModel alloc] init];
+    responseModel.sequence = cr.sequence;
+    responseModel.requestMapping = cr.requestMapping;
+    responseModel.responseCode = cr.responseCode;
+    responseModel.responseResult = cr.responseResult;
+    
     NSLog(@"HTTP Request Finished.");
     NSLog(@"Session Response Code:%@",cr.responseCode);
     
     if ([self.delegate respondsToSelector:@selector(receiveMessage:)]) {
         NSLog(@"callBack &&&&&&&回调");
-        [self.delegate receiveMessage:cr.responseCode];
+        [self.delegate receiveMessage:[responseModel mj_JSONObject]];
 
     }
 }

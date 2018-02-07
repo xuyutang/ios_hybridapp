@@ -17,6 +17,7 @@ PODS:
   - FMDB (2.7.2):
     - FMDB/standard (= 2.7.2)
   - FMDB/standard (2.7.2)
+  - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
   - MJExtension (3.0.13)
   - MJRefresh (3.1.15.1)
@@ -24,35 +25,43 @@ PODS:
     - PGPickerView
   - PGPickerView (1.2.1)
   - Reachability (3.2)
+  - SAMKeychain (1.5.3)
   - SDWebImage (4.2.2):
     - SDWebImage/Core (= 4.2.2)
   - SDWebImage/Core (4.2.2)
+  - SGQRCode (2.1.8)
 
 DEPENDENCIES:
   - ASIHTTPRequest (= 1.8.2)
   - BaiduMapKit (= 3.4.2)
   - Bugly (= 2.5.0)
   - FMDB (= 2.7.2)
+  - Masonry (= 1.1.0)
   - MBProgressHUD (= 1.1.0)
   - MJExtension (= 3.0.13)
   - MJRefresh (= 3.1.15.1)
   - PGDatePicker (= 1.5.12)
   - Reachability (= 3.2)
+  - SAMKeychain (= 1.5.3)
   - SDWebImage (= 4.2.2)
+  - SGQRCode (= 2.1.8)
 
 SPEC CHECKSUMS:
   ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
   BaiduMapKit: f61b19ecf07a3f2deede72b221b366bf698739ed
   Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
   PGDatePicker: 4db162e6bd07df60e1d1c5fe3aaeb8f761b9322c
   PGPickerView: cb49c6b3e2a39148bef9f666fa58bb349e0c3b85
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
+  SGQRCode: 989df341fb231fc7bf7e82316de2fc8de2961e10
 
-PODFILE CHECKSUM: b912e5502e76b6811586de36ded6078fde917989
+PODFILE CHECKSUM: 07f174210b588733c9cd5ad625ebef2a0345717f
 
 COCOAPODS: 1.4.0.beta.2

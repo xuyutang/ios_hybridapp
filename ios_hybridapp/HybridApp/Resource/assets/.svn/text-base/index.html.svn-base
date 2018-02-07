@@ -126,25 +126,28 @@ function onPageFinished(){
     //允许下拉刷新
     App.dragRefresh();
 
-
     //设置顶部右侧菜单
     App.setTopMenu([{"name":"刷新","callback":"refreshPage()"},{"name":"关闭","callback":"closeForResult()"},{"name":"操作","icon":"setting","callback":"fun2()"}]);
 
     //设置底部Tab功能
    var footer = new Array();
-   footer[0]={"name":"管理", "defaultIcon":"1", "activeIcon":"1_", "url":base+"/index.html"};
-   footer[1]={"name":"新建", "defaultIcon":"2", "activeIcon":"2_", "url":base+"/add.html"};
+   footer[1]={"name":"新建", "defaultIcon":"add", "activeIcon":"add_on", "url":base+"/add.html"};
+   footer[0]={"name":"管理", "defaultIcon":"manag", "activeIcon":"manag_on", "url":base+"/index.html"};
 
-    App.setFootMenu(footer);
+   //footer[2]={"name":"新建", "defaultIcon":"2", "activeIcon":"2_", "url":base+"/add.html"};
+   //footer[3]={"name":"新建", "defaultIcon":"2", "activeIcon":"2_", "url":base+"/add.html"};
+   //footer[4]={"name":"新建", "defaultIcon":"2", "activeIcon":"2_", "url":base+"/add.html"};
+
+    App.setTabbar(footer);
 
       //设置底部Tab徽章
     //var badge = 10;
-    //App.setBottomBadge(0, 10);
-    App.setBottomBadge(1, 83);
+    //App.setTabbarBadge(0, 10);
+    //App.setTabbarBadge(1, 83);
 
 
     //设置中部Tab页切换
-    var config = [{"callback":"regionChange","viewType":"REGION_VIEW","label":"区域"},{"callback":"departmentChange","viewType":"TREE_VIEW","label":"部门"},{"callback":"listChange","viewType":"LIST_VIEW","label":"客户类型", "viewFieldList":[ {"name":"customerType","label":"签约客户1","value":"1"},{"name":"customerType","label":"签约客户2","value":"2"},{"name":"customerType","label":"签约客户3","value":"3"},{"name":"customerType","label":"签约客户4","value":"4"}]},{"callback":"complexChange","viewType":"COMPLEX_VIEW","label":"筛选","viewFieldList":[{"name":"customerName","label":"客户姓名","type":"TEXT"},{"name":"postDate","label":"上报日期","type":"DATE"},{"name":"postcount","label":"签约金额","type":"DIGITAL"}]}];
+    var config = [{"callback":"regionChange","viewType":"REGION_VIEW","label":"区域"},{"callback":"departmentChange","viewType":"TREE_VIEW","label":"部门"},{"callback":"departmentChange","viewType":"TREE_VIEW","label":"分支机构"},{"callback":"listChange","viewType":"LIST_VIEW","label":"客户类型", "viewFieldList":[ {"name":"customerType","label":"签约客户1","value":"1"},{"name":"customerType","label":"签约客户2","value":"2"},{"name":"customerType","label":"签约客户3","value":"3"},{"name":"customerType","label":"签约客户4","value":"4"}]},{"callback":"complexChange","viewType":"COMPLEX_VIEW","label":"筛选","viewFieldList":[{"name":"customerName","label":"客户姓名","type":"TEXT"},{"name":"postDate","label":"上报日期","type":"DATE"},{"name":"postcount","label":"签约金额","type":"DIGITAL"}]}];
     App.setNavigator(config);
 }
 

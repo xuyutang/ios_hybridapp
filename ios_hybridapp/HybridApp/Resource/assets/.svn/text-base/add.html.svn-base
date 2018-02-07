@@ -23,6 +23,26 @@
 </head>
 <body>
 <form id="myFormId">
+
+    <div class="weui-cells__title">Wifi</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入文本" rows="5" id="wifi" name="wifi" maxlength="500"></textarea>
+                <div class="weui-textarea-counter"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="weui-cells__title">当前位置</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入文本" rows="5" id="location" name="location" maxlength="500"></textarea>
+                <div class="weui-textarea-counter"></div>
+            </div>
+        </div>
+    </div>
 <div class="weui-cells__title">工作内容</div>
 <div class="weui-cells weui-cells_form">
     <div class="weui-cell">
@@ -53,10 +73,6 @@
                 </div>
                 <div class="weui-uploader__bd">
                     <ul class="weui-uploader__files" id="imgList">
-					<li class="weui-uploader__file p-relative">
-						<img src="http://b.hiphotos.baidu.com/image/h%3D300/sign=db34bde9b97eca800d053fe7a1229712/5fdf8db1cb1349546006f3ae5f4e9258d0094adb.jpg" v="" onclick="viewImage(this)">
-						<span class="toTrash"><i class="iconfont icon-lajitong1 m-r-0"></i></span>
-					</li>
                     </ul>
                     <div class="weui-uploader__input-box">
 
@@ -112,12 +128,29 @@
 </form>
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-weui.min.js"></script>
-<script src="js/appclient.js"></script>
+<script src="js/appclient.js?v2"></script>
 <script>
 function onPageFinished(){
     App.setTitle("添加日志");
-    App.dragRefresh();
-    App.setTopMenu([{"name":"保存","callback":"saveForm()"}]);
+     App.setNavigator('');
+    App.dragRefresh(false);
+    App.setTopMenu([{"name":"保存","callback":"saveForm()"},{"name":"wifi","callback":"wifiSetting()"}]);
+    App.getLocation();
+
+    //获取当前WIFI热点的名称和MAC地址
+    var currentWifi = App.getCurrentWifi();
+    $("#wifi").val(JSON.stringify(currentWifi));
+}
+//打开WLAN设置界面
+function wifiSetting(){
+    App.openWifiSetting();
+}
+//监听WIFI热点切换
+function onBroadcastReceiver(action){
+ if("Broadcast_Wifi_Connected" == action){
+     var currentWifi = App.getCurrentWifi();
+    $("#wifi").val(JSON.stringify(currentWifi));
+ }
 }
 </script>
 
@@ -125,6 +158,11 @@ function onPageFinished(){
 <script src="js/validatejs/workLog.js"></script>
 <script src="js/area.js"></script>
 <script>
+
+
+function setLocation(locationVal){
+ $("#location").val(JSON.stringify(locationVal));
+}
 var count = 0;
 function saveForm(){
    if(!$("#myFormId").validateForm(saveWorkLogConfig)) {
@@ -162,30 +200,35 @@ $(document).ready(function(){
         //图片选择
         $("#addImage").click(function(){
             App.selectImg({"callback":"setImage","params":{"srcType":"SysCamera","cropWith":"300","cropHeight":"300","autoCrop":"true"}});
+
+            //App.selectVideo({"callback":"setVideo","params":{"duration":5,"srcUrl":"http://189.etao189.com/f/v/plugin_update.xml"}});
         });
-
-
-
 
 
 		$("#imgList").on("click", "li span", function(){
-        window.webkit.messageHandlers.remove.postMessage('remove');
-
-          //  $(this).parent().remove();
+		    App.prompt( $(this).siblings().attr("aliasSrc"));
+		    var filePath = $(this).siblings().attr("aliasSrc");
+		    App.deleteFile(filePath);
+            $(this).parent().remove();
         });
-		
-        
+
     });
+
+
+    function setVideo(value){
+
+     alert(JSON.stringify(value));
+    }
 
 
 
 function setImage(value) {
+	var _localUrl = value.replace("http://androidlocalimg", "");
+	var base64String = App.base64File(_localUrl);
     var img=   '<li class="weui-uploader__file p-relative newImg">'
-                +    '<img src="'+value+'" v="" onclick="viewImage(this)">'
+                +    '<img aliasSrc="'+_localUrl+'" src="data:image/jpg;base64,'+base64String + '" v="" onclick="viewImage(this)">'
                 +    '<span class="toTrash"><i class="iconfont icon-lajitong1 m-r-0"></i></span>'
                 +'</li>';
-    //读取文件内容，(Base64编码后的，保存至服务器时需要解码后存成图片文件)    
-    //'data:image/jpeg;base64, EDKSD002834DKKFJFHFJ......     
     $(img).appendTo("#imgList");
 }
 
@@ -196,15 +239,15 @@ function onPageEnd(){}
 function onResume(){
     if (App.get("imgs") != null)
     {
-        var imgs = App.get("imgs");
-		$("#imgList").empty();
-        $(imgs).appendTo("#imgList");
-		App.remove("imgs");
+        //var imgs = App.get("imgs");
+		//$("#imgList").empty();
+        //$(imgs).appendTo("#imgList");
+		//App.remove("imgs");
      }
 }
 
 function onSaveState(){
-    App.put("imgs", $("#imgList").html());
+    //App.put("imgs", $("#imgList").html());
 }
 
 

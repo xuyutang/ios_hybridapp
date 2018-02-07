@@ -15,11 +15,17 @@
 
 + (LocationHelper *)sharedInstance;
 
+//初始化
 - (void)startWithBaiduKey:(NSString*)baiduKey;
-- (void)startUserLocationService;
-- (void)stopUserLocationService;
-
+//开启用户定位
+- (void)trunOnUserLocationService;
+//关闭用户定位
+- (void)trunOffUserLocationService;
+//刷新用户定位
 - (void)refreshUserLocation;
+//打开定位配置
+- (void)openLocationSetting;
+
 @property(readonly, nonatomic) LocationModel *locationModel;
 
 @end

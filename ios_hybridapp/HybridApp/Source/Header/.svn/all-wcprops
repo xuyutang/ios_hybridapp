@@ -1,23 +1,23 @@
 K 25
 svn:wc:ra_dav:version-url
 V 81
-/repo/winetone/!svn/ver/31041/trunk/telecom/ios_hybridapp/HybridApp/Source/Header
+/repo/winetone/!svn/ver/31379/trunk/telecom/ios_hybridapp/HybridApp/Source/Header
 END
 DeviceConstant.h
 K 25
 svn:wc:ra_dav:version-url
 V 98
-/repo/winetone/!svn/ver/31041/trunk/telecom/ios_hybridapp/HybridApp/Source/Header/DeviceConstant.h
+/repo/winetone/!svn/ver/31379/trunk/telecom/ios_hybridapp/HybridApp/Source/Header/DeviceConstant.h
 END
 ProductConstant.h
 K 25
 svn:wc:ra_dav:version-url
 V 99
-/repo/winetone/!svn/ver/31001/trunk/telecom/ios_hybridapp/HybridApp/Source/Header/ProductConstant.h
+/repo/winetone/!svn/ver/31379/trunk/telecom/ios_hybridapp/HybridApp/Source/Header/ProductConstant.h
 END
 HybridAppPrefixHeader.pch
 K 25
 svn:wc:ra_dav:version-url
 V 107
-/repo/winetone/!svn/ver/31001/trunk/telecom/ios_hybridapp/HybridApp/Source/Header/HybridAppPrefixHeader.pch
+/repo/winetone/!svn/ver/31379/trunk/telecom/ios_hybridapp/HybridApp/Source/Header/HybridAppPrefixHeader.pch
 END

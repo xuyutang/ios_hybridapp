@@ -98,9 +98,9 @@
     }
 }
 //设置底部菜单
--(void)setFootMenu:(id)data{
+-(void)setTabbar:(id)data{
     if (_delegate) {
-        [_delegate setFootMenu:data];
+        [_delegate setTabbar:data];
     }
 }
 //读取文件
@@ -250,9 +250,10 @@
     }
 }
 //设置底部
--(void)setBottomBadge:(id)data{
+-(void)setTabbarBadge:(id)index :(id)number
+{
     if (_delegate) {
-        [_delegate setBottomBadge:data];
+        [_delegate setTabbarBadge:index :number];
     }
 }
 //设置标题图标
@@ -336,6 +337,18 @@
         [_delegate closeForResult:data];
     }
 }
-
+//打开WiFi设置
+-(void)openWifiSetting {
+    if (_delegate) {
+        [_delegate openWifiSetting];
+    }
+}
+//获取WiFi
+-(NSString*)getCurrentWifi {
+    if (_delegate) {
+     return [_delegate getCurrentWifi];
+    }
+    return nil;
+}
 
 @end

@@ -278,6 +278,7 @@
 
 #pragma mark 时间选择
 -(void)tapAction:(UITapGestureRecognizer*)tap {
+    [self endEditing:YES];
     timeInt = tap.view.tag - 1000;
     PGDatePicker *datePicker = [[PGDatePicker alloc]init];
     datePicker.delegate = self;

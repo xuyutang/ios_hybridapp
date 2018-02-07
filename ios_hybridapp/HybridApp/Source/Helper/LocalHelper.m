@@ -9,10 +9,15 @@
 #import "LocalHelper.h"
 #import "NSString+Util.h"
 #import "DeviceConstant.h"
+#import "SAMKeychain.h"
+#import "UIDevice+Util.h"
 
-@interface LocalHelper()
+#define kKeychainServiceName                 @"9MZ9ZQG82C.cc.juicyshare.salesmanager"
+#define kDeviceId                            @"DeviceID"
 
-@property (nonatomic,strong) NSString *dbPath;
+@interface LocalHelper(){
+    NSString *_dbPath;
+}
 
 @end
 
@@ -33,21 +38,17 @@
 
 -(id)init
 {
-    /*NSLog(@"%@",[NSString UUID]);
     NSString* doc = PATH_OF_DOCUMENT;
-    NSString* path = [doc stringByAppendingPathComponent:@"potato.sqlite"];
-    
-    //首次创建数据文件时 清空已缓存的 NSUserDefaults
-    NSFileManager *mgr = [[NSFileManager alloc] init];
-     if (![mgr fileExistsAtPath:path]) {
-     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-     }
-    
+    NSString* path = [doc stringByAppendingPathComponent:@"WTDB_V4.sqlite"];
     _dbPath = [[NSString alloc] initWithString:path];
-    
-    //[self _initTable];
-    */
+
+    /*
+     //首次创建数据文件时 清空已缓存的 NSUserDefaults
+    NSFileManager *mgr = [[NSFileManager alloc] init];
+    if (![mgr fileExistsAtPath:path]) {
+        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    }*/
     self = [super init];
     return self;
 }
@@ -68,6 +69,27 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults] ;
     [defaults setObject:value forKey:key];
     [defaults synchronize];
+}
+
+-(NSString*)getValueFromKeychainWithKey:(NSString *)key{
+    return [SAMKeychain passwordForService:kKeychainServiceName account:key];
+}
+
+-(void)removeFromKeychainWithKey:(NSString *)key{
+    [SAMKeychain deletePasswordForService:kKeychainServiceName account:key];
+}
+
+-(void)saveValueToKeychainWithKey:(id)value key:(NSString *)key{
+    [SAMKeychain setPassword:value forService:kKeychainServiceName account:key];
+}
+
+-(NSString*)getDeviceUUID{
+    if (![self getValueFromKeychainWithKey:kDeviceId]){
+        [self saveValueToKeychainWithKey:[UIDevice deviceId] key:kDeviceId];
+    }
+    
+    NSString* deviceid = [self getValueFromKeychainWithKey:kDeviceId];
+    return deviceid;
 }
 
 - (NSMutableArray*) getProvinces{

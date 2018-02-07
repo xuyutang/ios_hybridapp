@@ -130,6 +130,23 @@
  */
 + (MBProgressHUD *)showProgressToView:(UIView *)view Text:(NSString *)text;
 
+/**
+ *  文字，无图，底部出现
+ *
+ *  @param text 要显示的文字
+ *  @param view 要添加的View
+ *  @param time 停留时间
+ */
++(void)showTextMessage:(NSString *)message ToView:(UIView *)view RemainTime:(CGFloat)time;
+/**
+ *  文字，无图，非模态
+ *
+ *  @param text 要显示的文字
+ *  @param view 要添加的View
+ *  @param time 停留时间
+ */
++(void)showMessageWithNoModel:(NSString *)message RemainTime:(CGFloat)time;
+
 
 /**
  *  隐藏ProgressView

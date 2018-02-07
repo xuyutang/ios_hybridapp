@@ -1,14 +1,14 @@
 10
 
 dir
-31046
+31448
 http://xuyutang%40juicyshare.cc@svn.juicyshare.cc/repo/winetone/trunk/telecom/ios_hybridapp/HybridApp/Resource/Assets.xcassets/AppIcon.appiconset
 http://xuyutang%40juicyshare.cc@svn.juicyshare.cc/repo/winetone
 
 
 
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-02T08:10:33.555304Z
+31359
 lzhang@cn.ufinity.com
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2018-01-22T17:50:30.000000Z
-ca199a343a43088d67bc14ef2c03c72e
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-02T08:10:33.000000Z
+762a69433202d02d9fd831825629bb35
+2018-02-02T08:10:33.555304Z
+31359
 lzhang@cn.ufinity.com
 has-props
 
@@ -58,7 +58,7 @@ has-props
 
 
 
-3450
+4404
 
 AppIcon29x29@3x.png
 file
@@ -66,10 +66,10 @@ file
 
 
 
-2018-01-22T17:50:30.000000Z
-5660621e398b1725c3abe83c4a1ab416
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-02T08:10:33.000000Z
+513df2f7d5d1c21655ae210ec84eb5d3
+2018-02-02T08:10:33.555304Z
+31359
 lzhang@cn.ufinity.com
 has-props
 
@@ -92,7 +92,7 @@ has-props
 
 
 
-6107
+5187
 
 Contents.json
 file
@@ -134,10 +134,10 @@ file
 
 
 
-2018-01-22T17:50:30.000000Z
-49151922531684fe2eb2e3d68f2c0d00
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-02T08:10:33.000000Z
+0c49882f0db67f75394a5fe5739315f1
+2018-02-02T08:10:33.555304Z
+31359
 lzhang@cn.ufinity.com
 has-props
 
@@ -160,7 +160,7 @@ has-props
 
 
 
-5133
+5027
 
 AppIcon57x57@2x.png
 file
@@ -168,10 +168,10 @@ file
 
 
 
-2018-01-22T17:50:30.000000Z
-1709562a9a9ad11ea33ac4c19dca0dba
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-02T08:10:33.000000Z
+02275bd58423aa69352b6d2c2d14c3d7
+2018-02-02T08:10:33.555304Z
+31359
 lzhang@cn.ufinity.com
 has-props
 
@@ -194,7 +194,7 @@ has-props
 
 
 
-16741
+5503
 
 AppIcon40x40@3x.png
 file
@@ -202,10 +202,10 @@ file
 
 
 
-2018-01-22T17:50:30.000000Z
-41d3e9e49f2a3e808b370d4250bdd130
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-02T08:10:33.000000Z
+e4aebe7ee61eb1f063a18156e751a53b
+2018-02-02T08:10:33.555304Z
+31359
 lzhang@cn.ufinity.com
 has-props
 
@@ -228,7 +228,7 @@ has-props
 
 
 
-8740
+5861
 
 AppIcon29x29.png
 file
@@ -236,10 +236,10 @@ file
 
 
 
-2018-01-22T17:50:30.000000Z
-130041d48c2e9d3e2af263512de78f77
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-02T08:10:33.000000Z
+63fce04cb07bcc078149571268103758
+2018-02-02T08:10:33.555304Z
+31359
 lzhang@cn.ufinity.com
 has-props
 
@@ -262,7 +262,7 @@ has-props
 
 
 
-1328
+3704
 
 AppIcon60x60@2x.png
 file
@@ -270,10 +270,10 @@ file
 
 
 
-2018-01-22T17:50:30.000000Z
-41d3e9e49f2a3e808b370d4250bdd130
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-02T08:10:33.000000Z
+e4aebe7ee61eb1f063a18156e751a53b
+2018-02-02T08:10:33.555304Z
+31359
 lzhang@cn.ufinity.com
 has-props
 
@@ -296,7 +296,7 @@ has-props
 
 
 
-8740
+5861
 
 AppIcon60x60@3x.png
 file
@@ -304,10 +304,10 @@ file
 
 
 
-2018-01-22T17:50:30.000000Z
-ba362203720036eac5b76eb599ba9ea3
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-02T08:10:33.000000Z
+9a684d7b06232e8eac2b4f7ef96f5f45
+2018-02-02T08:10:33.555304Z
+31359
 lzhang@cn.ufinity.com
 has-props
 
@@ -330,7 +330,7 @@ has-props
 
 
 
-13284
+7537
 
 AppIcon57x57.png
 file
@@ -338,10 +338,10 @@ file
 
 
 
-2018-01-22T17:50:30.000000Z
-5e606397d00f1dec864550db444d8527
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-02T08:10:33.000000Z
+a0239c92de508689d4bbabcd674d70a3
+2018-02-02T08:10:33.555304Z
+31359
 lzhang@cn.ufinity.com
 has-props
 
@@ -364,5 +364,5 @@ has-props
 
 
 
-7335
+4367
 

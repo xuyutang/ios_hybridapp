@@ -1,7 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 80
-/repo/winetone/!svn/ver/31001/trunk/telecom/ios_hybridapp/HybridApp/Source/Model
+/repo/winetone/!svn/ver/31328/trunk/telecom/ios_hybridapp/HybridApp/Source/Model
+END
+AppSessionResponseModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/repo/winetone/!svn/ver/31312/trunk/telecom/ios_hybridapp/HybridApp/Source/Model/AppSessionResponseModel.m
 END
 LocationModel.h
 K 25
@@ -81,6 +87,12 @@ svn:wc:ra_dav:version-url
 V 98
 /repo/winetone/!svn/ver/31001/trunk/telecom/ios_hybridapp/HybridApp/Source/Model/DataInputStream.m
 END
+BottomMenuModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/repo/winetone/!svn/ver/31115/trunk/telecom/ios_hybridapp/HybridApp/Source/Model/BottomMenuModel.h
+END
 DataOutputStream.m
 K 25
 svn:wc:ra_dav:version-url
@@ -105,6 +117,18 @@ svn:wc:ra_dav:version-url
 V 87
 /repo/winetone/!svn/ver/30995/trunk/telecom/ios_hybridapp/HybridApp/Source/Model/City.m
 END
+BottomMenuModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/repo/winetone/!svn/ver/31115/trunk/telecom/ios_hybridapp/HybridApp/Source/Model/BottomMenuModel.m
+END
+WifiModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repo/winetone/!svn/ver/31328/trunk/telecom/ios_hybridapp/HybridApp/Source/Model/WifiModel.h
+END
 DeviceModel.h
 K 25
 svn:wc:ra_dav:version-url
@@ -116,6 +140,18 @@ K 25
 svn:wc:ra_dav:version-url
 V 96
 /repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Source/Model/CustomerModel.h
+END
+AppSessionResponseModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/repo/winetone/!svn/ver/31312/trunk/telecom/ios_hybridapp/HybridApp/Source/Model/AppSessionResponseModel.h
+END
+WifiModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repo/winetone/!svn/ver/31328/trunk/telecom/ios_hybridapp/HybridApp/Source/Model/WifiModel.m
 END
 DeviceModel.m
 K 25

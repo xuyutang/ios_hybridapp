@@ -1,7 +1,7 @@
 10
 
 dir
-31046
+31448
 http://xuyutang%40juicyshare.cc@svn.juicyshare.cc/repo/winetone/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender/ALBBQuPai/ALBBQuPaiPlugin.bundle
 http://xuyutang%40juicyshare.cc@svn.juicyshare.cc/repo/winetone
 
@@ -25,40 +25,6 @@ lzhang@cn.ufinity.com
 
 
 623e0554-a5f7-42f6-b1a0-41371c15f11f
-
-preview_arrow_l_1@2x.png
-file
-
-
-
-
-2018-01-22T17:50:30.000000Z
-1029699aa8b1ecb4b37c0327ecf1a8ad
-2018-01-22T17:50:30.787855Z
-30947
-lzhang@cn.ufinity.com
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-601
 
 record_progress_arrow_left@2x.png
 file
@@ -94,14 +60,14 @@ has-props
 
 379
 
-record_ico_countdown_1@2x.png
+preview_arrow_l_1@2x.png
 file
 
 
 
 
 2018-01-22T17:50:30.000000Z
-33997c89cd29de612861c010c0002f3c
+1029699aa8b1ecb4b37c0327ecf1a8ad
 2018-01-22T17:50:30.787855Z
 30947
 lzhang@cn.ufinity.com
@@ -126,7 +92,7 @@ has-props
 
 
 
-1292
+601
 
 record_ico_mackup_1@2x.png
 file
@@ -161,6 +127,40 @@ has-props
 
 
 1767
+
+record_ico_countdown_1@2x.png
+file
+
+
+
+
+2018-01-22T17:50:30.000000Z
+33997c89cd29de612861c010c0002f3c
+2018-01-22T17:50:30.787855Z
+30947
+lzhang@cn.ufinity.com
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1292
 
 draft_tick_1@2x.png
 file
@@ -298,14 +298,14 @@ has-props
 
 2870
 
-record_zoomlens_ico@2x.png
+makeup_ico_frame_00003.png
 file
 
 
 
 
 2018-01-22T17:50:30.000000Z
-fc3cfc4ce64929f91cf58101149e6db7
+8638e5a82734eac41cf34adf9564d2d1
 2018-01-22T17:50:30.787855Z
 30947
 lzhang@cn.ufinity.com
@@ -330,7 +330,7 @@ has-props
 
 
 
-720
+2878
 
 record_focus_big@2x.png
 file
@@ -366,14 +366,14 @@ has-props
 
 278
 
-makeup_ico_frame_00003.png
+record_zoomlens_ico@2x.png
 file
 
 
 
 
 2018-01-22T17:50:30.000000Z
-8638e5a82734eac41cf34adf9564d2d1
+fc3cfc4ce64929f91cf58101149e6db7
 2018-01-22T17:50:30.787855Z
 30947
 lzhang@cn.ufinity.com
@@ -398,41 +398,7 @@ has-props
 
 
 
-2878
-
-ico_play@2x.png
-file
-
-
-
-
-2018-01-22T17:50:30.000000Z
-8dc327e285d45d32938b469145e899d6
-2018-01-22T17:50:30.787855Z
-30947
-lzhang@cn.ufinity.com
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-3544
+720
 
 makeup_ico_frame_00004.png
 file
@@ -468,14 +434,14 @@ has-props
 
 2872
 
-record_ico_rec_push@2x.png
+ico_play@2x.png
 file
 
 
 
 
 2018-01-22T17:50:30.000000Z
-83b2e08918d0e8121907560243c7460c
+8dc327e285d45d32938b469145e899d6
 2018-01-22T17:50:30.787855Z
 30947
 lzhang@cn.ufinity.com
@@ -500,7 +466,7 @@ has-props
 
 
 
-4506
+3544
 
 makeup_ico_frame_00005.png
 file
@@ -535,6 +501,40 @@ has-props
 
 
 3323
+
+record_ico_rec_push@2x.png
+file
+
+
+
+
+2018-01-22T17:50:30.000000Z
+83b2e08918d0e8121907560243c7460c
+2018-01-22T17:50:30.787855Z
+30947
+lzhang@cn.ufinity.com
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4506
 
 makeup_ico_frame_00006.png
 file
@@ -1018,40 +1018,6 @@ has-props
 
 753
 
-makeup_ico_frame_00010.png
-file
-
-
-
-
-2018-01-22T17:50:30.000000Z
-5c0116f29322106fc4f574a2528e44ad
-2018-01-22T17:50:30.787855Z
-30947
-lzhang@cn.ufinity.com
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-4123
-
 cut_guide_dragvideo@2x.png
 file
 
@@ -1086,14 +1052,14 @@ has-props
 
 2829
 
-makeup_ico_frame_00011.png
+makeup_ico_frame_00010.png
 file
 
 
 
 
 2018-01-22T17:50:30.000000Z
-7fa409888dd7937907ba9fbd9cba2623
+5c0116f29322106fc4f574a2528e44ad
 2018-01-22T17:50:30.787855Z
 30947
 lzhang@cn.ufinity.com
@@ -1118,7 +1084,7 @@ has-props
 
 
 
-4091
+4123
 
 record_ico_flashlight_1@2x.png
 file
@@ -1154,6 +1120,40 @@ has-props
 
 776
 
+makeup_ico_frame_00011.png
+file
+
+
+
+
+2018-01-22T17:50:30.000000Z
+7fa409888dd7937907ba9fbd9cba2623
+2018-01-22T17:50:30.787855Z
+30947
+lzhang@cn.ufinity.com
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4091
+
 makeup_ico_frame_00012.png
 file
 
@@ -1188,14 +1188,14 @@ has-props
 
 3729
 
-makeup_ico_frame_00013.png
+music_0@2x.png
 file
 
 
 
 
 2018-01-22T17:50:30.000000Z
-4e51a1ec6abdd2754475298f79c2884d
+fd32af2e12e725f6c83ce4e7529fde3b
 2018-01-22T17:50:30.787855Z
 30947
 lzhang@cn.ufinity.com
@@ -1220,7 +1220,7 @@ has-props
 
 
 
-3385
+13522
 
 edit_ico_music_1@2x.png
 file
@@ -1256,14 +1256,14 @@ has-props
 
 546
 
-music_0@2x.png
+makeup_ico_frame_00013.png
 file
 
 
 
 
 2018-01-22T17:50:30.000000Z
-fd32af2e12e725f6c83ce4e7529fde3b
+4e51a1ec6abdd2754475298f79c2884d
 2018-01-22T17:50:30.787855Z
 30947
 lzhang@cn.ufinity.com
@@ -1288,7 +1288,7 @@ has-props
 
 
 
-13522
+3385
 
 makeup_ico_frame_00014.png
 file
@@ -1392,39 +1392,8 @@ has-props
 
 5255
 
-makeup_ico_frame_00017.png
-file
-
-
-
-
-2018-01-22T17:50:30.000000Z
-ead75d98fc79112a01b9b67dbd48fd11
-2018-01-22T17:50:30.787855Z
-30947
-lzhang@cn.ufinity.com
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-4844
+QPEffectViewCell~iphone.nib
+dir
 
 cut_bar_progress@2x.png
 file
@@ -1460,8 +1429,39 @@ has-props
 
 200
 
-QPEffectViewCell~iphone.nib
-dir
+makeup_ico_frame_00017.png
+file
+
+
+
+
+2018-01-22T17:50:30.000000Z
+ead75d98fc79112a01b9b67dbd48fd11
+2018-01-22T17:50:30.787855Z
+30947
+lzhang@cn.ufinity.com
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4844
 
 makeup_ico_frame_00018.png
 file
@@ -1531,39 +1531,8 @@ has-props
 
 4504
 
-record_ico_next@2x.png
-file
-
-
-
-
-2018-01-22T17:50:30.000000Z
-4db9f2ede4a3cf5f1bdec8daee3aa205
-2018-01-22T17:50:30.787855Z
-30947
-lzhang@cn.ufinity.com
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-606
+QPEffectViewController.nib
+dir
 
 tip_record_delete.tiff
 file
@@ -1599,17 +1568,14 @@ has-props
 
 30158
 
-QPEffectViewController.nib
-dir
-
-input_ico_album@2x.png
+record_ico_next@2x.png
 file
 
 
 
 
 2018-01-22T17:50:30.000000Z
-ca7b762901b5122cc161f861abb0ca13
+4db9f2ede4a3cf5f1bdec8daee3aa205
 2018-01-22T17:50:30.787855Z
 30947
 lzhang@cn.ufinity.com
@@ -1634,41 +1600,7 @@ has-props
 
 
 
-143
-
-record_ico_switch_1@2x.png
-file
-
-
-
-
-2018-01-22T17:50:30.000000Z
-bf7d4b368c524ce5e9d3aec4eaed04bf
-2018-01-22T17:50:30.787855Z
-30947
-lzhang@cn.ufinity.com
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1248
+606
 
 record_progress_arrow_right@2x.png
 file
@@ -1704,14 +1636,14 @@ has-props
 
 378
 
-record_ico_close_1@2x.png
+record_ico_switch_1@2x.png
 file
 
 
 
 
 2018-01-22T17:50:30.000000Z
-4f9e0d334764a9f49edbeeb3de6e6261
+bf7d4b368c524ce5e9d3aec4eaed04bf
 2018-01-22T17:50:30.787855Z
 30947
 lzhang@cn.ufinity.com
@@ -1736,7 +1668,41 @@ has-props
 
 
 
-357
+1248
+
+input_ico_album@2x.png
+file
+
+
+
+
+2018-01-22T17:50:30.000000Z
+ca7b762901b5122cc161f861abb0ca13
+2018-01-22T17:50:30.787855Z
+30947
+lzhang@cn.ufinity.com
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+143
 
 record_ico_flashlight@2x.png
 file
@@ -1772,14 +1738,14 @@ has-props
 
 1166
 
-edit_ico_music@2x.png
+record_ico_close_1@2x.png
 file
 
 
 
 
 2018-01-22T17:50:30.000000Z
-6b00170d61029b175abe27b71c9962da
+4f9e0d334764a9f49edbeeb3de6e6261
 2018-01-22T17:50:30.787855Z
 30947
 lzhang@cn.ufinity.com
@@ -1804,7 +1770,7 @@ has-props
 
 
 
-546
+357
 
 Nightmode_sliderbar_+@2x.png
 file
@@ -1840,6 +1806,40 @@ has-props
 
 157
 
+edit_ico_music@2x.png
+file
+
+
+
+
+2018-01-22T17:50:30.000000Z
+6b00170d61029b175abe27b71c9962da
+2018-01-22T17:50:30.787855Z
+30947
+lzhang@cn.ufinity.com
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+546
+
 record_tip_ico_countdown@2x.png
 file
 
@@ -1874,14 +1874,14 @@ has-props
 
 1162
 
-record_ico_save_dis@2x.png
+edit_sample_focus@2x.png
 file
 
 
 
 
 2018-01-22T17:50:30.000000Z
-45c3736ea456dac08cde4488d43720f5
+53b1013309bfd2ae5f842d518247eb54
 2018-01-22T17:50:30.787855Z
 30947
 lzhang@cn.ufinity.com
@@ -1906,7 +1906,7 @@ has-props
 
 
 
-429
+171
 
 cancel@2x.png
 file
@@ -1942,14 +1942,14 @@ has-props
 
 571
 
-edit_sample_focus@2x.png
+record_ico_save_dis@2x.png
 file
 
 
 
 
 2018-01-22T17:50:30.000000Z
-53b1013309bfd2ae5f842d518247eb54
+45c3736ea456dac08cde4488d43720f5
 2018-01-22T17:50:30.787855Z
 30947
 lzhang@cn.ufinity.com
@@ -1974,7 +1974,7 @@ has-props
 
 
 
-171
+429
 
 record_ico_save@2x.png
 file

@@ -48,12 +48,17 @@
 #import "JGPopView.h"
 #import "UIImageView+WebCache.h"
 #import "MBProgressHUD+Util.h"
+#import "BottomMenuModel.h"
+#import "FootMenuView.h"
+#import <SystemConfiguration/CaptiveNetwork.h>
+#import "WifiModel.h"
 
-#define kAuthToken     @"authToken"
-#define kObjectKey     @"value"
-#define kDeviceId      @"deviceid"
 
-@interface DeprecatedWebViewController ()<UIWebViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIScrollViewDelegate,ConfirmSureBtnDelegate,UIAlertViewDelegate,CropImageViewControllerDelegate,DateRangeViewDelegate,PGDatePickerDelegate,QupaiSDKDelegate,MPMoviePlayerPlayDelegate,HeaderSearchBarDelegate,DropMenuDelegate,SingleDropMenuDelegate,ComplexSearchDelegate,NSURLConnectionDelegate,HttpRequestDelegate,JSBridgeProtocol,selectIndexPathDelegate>{
+#define kAuthToken                  @"authToken"
+#define kObjectKey                  @"value"
+#define kTimeOut                    60.0
+
+@interface DeprecatedWebViewController ()<UIWebViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIScrollViewDelegate,ConfirmSureBtnDelegate,UIAlertViewDelegate,CropImageViewControllerDelegate,DateRangeViewDelegate,PGDatePickerDelegate,QupaiSDKDelegate,MPMoviePlayerPlayDelegate,HeaderSearchBarDelegate,DropMenuDelegate,SingleDropMenuDelegate,ComplexSearchDelegate,NSURLConnectionDelegate,HttpRequestDelegate,JSBridgeProtocol,selectIndexPathDelegate,FootMenuViewDelegate>{
     
     NSMutableDictionary *_dictCallback;
     NSMutableArray *_topMenus;
@@ -86,6 +91,13 @@
     NSArray *_provinces, *_cities, *_areas;
     DropMenu *_reginMenu;
     NSMutableArray *_moretopMenuArray;
+    UIView* _leftView;
+    NSMutableArray *_footModelMuarry;
+    FootMenuView *_footMenu;
+    NSString *_macAddrString;
+    NSString *_wifiNameString;
+    NSString *_postCallback;
+    NSTimer *_timerOutTimer;
 }
 
 @end
@@ -95,17 +107,17 @@
 #pragma mark - 初始化界面和参数
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self initParameters];
     [self setupSubViews];
     [self setupWebView];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshLocation) name:kUpdateLocationNotification object:nil];
     _hostReach = [Reachability reachabilityForInternetConnection];
+    //监听网络改变
     [[NSNotificationCenter defaultCenter]addObserver:self  selector:@selector(netStatusChange:) name:kReachabilityChangedNotification object:nil];
     [_hostReach startNotifier];
     // Do any additional setup after loading the view.
     [self loadRequestWithURLString:_urlString];
+
 }
 
 - (void) initParameters{
@@ -115,15 +127,19 @@
 }
 
 - (void) setupSubViews {
-    self.navigationController.navigationBar.hidden = YES;
+    self.navigationController.navigationBar.hidden = NO;
     
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:MAIN_COLOR];
-    
-    UIView* leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+    //消除导航栏背景色差
+    self.navigationController.navigationBar.translucent = NO;
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#f7f7fa"];
+
+     _leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
     UIImageView* leftImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 13, 11.6, 18.8)];
     [leftImageView setImage:[UIImage imageNamed:@"newback"]];
-    [leftView addSubview:leftImageView];
-    
+    [_leftView addSubview:leftImageView];
+    _leftView.hidden = YES;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickLeftButton:)];
     [tapGesture setNumberOfTapsRequired:1];
     [leftImageView addGestureRecognizer:tapGesture];
@@ -141,12 +157,12 @@
     _lblFunctionName.font = [UIFont systemFontOfSize:18];
     [_lblFunctionName setBackgroundColor:[UIColor clearColor]];
     _lblFunctionName.textAlignment = NSTextAlignmentLeft;
-    [leftView addSubview:_lblFunctionName];
+    [_leftView addSubview:_lblFunctionName];
     leftImageView.image = [UIImage imageNamed:@"newback"];
-    [leftView addSubview:leftImageView];;
-    [leftView addGestureRecognizer:tapGesture];
+    [_leftView addSubview:leftImageView];;
+    [_leftView addGestureRecognizer:tapGesture];
     
-    UIBarButtonItem *btLogo = [[UIBarButtonItem alloc] initWithCustomView:leftView];
+    UIBarButtonItem *btLogo = [[UIBarButtonItem alloc] initWithCustomView:_leftView];
     self.navigationItem.leftBarButtonItem = btLogo;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
@@ -216,24 +232,31 @@
 
 #pragma mark - WebView代理方法
 -(void)webViewDidStartLoad:(UIWebView *)webView{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD showLoadToView:self.view];
-    });
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [MBProgressHUD showLoadToView:self.view];
+//    });
     [self addCustomActions];
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
+    [_timerOutTimer invalidate];
     [self addCustomActions];
-    if (![webView.request.URL.absoluteString containsString:@"error"] ) {
-        self.urlString = webView.request.URL.absoluteString;
-        DLog(@"Save current url:%@",webView.request.URL.absoluteString);
-    }
+    
     [self executeCallback:@"onPageFinished" params:nil];
+    
+    JSValue *funcValue = self.context[@"onPageFinished"];
+    if (![[funcValue toString] containsString:@"setTitle"]) {
+        self.navigationController.navigationBar.hidden = YES;
+        _hasNavBar = NO;
+    }else {
+        self.navigationController.navigationBar.hidden = NO;
+        _hasNavBar = YES;
+    }
     if(_header){
         [self endRefresh];
         [_webView.scrollView.mj_header endRefreshing];
     }
-    //[MBProgressHUD hideHUD];
+    //
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     
     CGFloat y = 0;
@@ -253,13 +276,13 @@
     }
     
     if (_hasTopMenu && _hasbottomMenu) {
-        _webView.frame = CGRectMake(0, webViewY, MAINWIDTH, MAINHEIGHT - 90);
+        _webView.frame = CGRectMake(0, webViewY, MAINWIDTH, MAINHEIGHT - footY - 45);
         
     } else if (_hasTopMenu && !_hasbottomMenu) {
         _webView.frame = CGRectMake(0, webViewY, MAINWIDTH, MAINHEIGHT - 45);
         
     } else if (!_hasTopMenu && _hasbottomMenu) {
-        _webView.frame = CGRectMake(STATEBARHEIGHT, 0, MAINWIDTH, MAINHEIGHT - 45);
+        _webView.frame = CGRectMake(0, y, MAINWIDTH, height - footY);
         
     } else {
         _webView.frame = CGRectMake(0, y, MAINWIDTH, height);
@@ -267,10 +290,10 @@
 }
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"%@",error);
+    DLog(@"%@",error);
     [self endRefresh];
     
-    [MBProgressHUD hideHUD];
+    
     [MBProgressHUD hideHUDForView:self.view];
 }
 
@@ -355,9 +378,8 @@
 }
 
 - (void)prompt:(id)data {
-    NSLog(@"++++++%@++++++++",data);
     dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD showMessage:data ToView:nil RemainTime:3.0];
+        [MBProgressHUD showMessage:data ToView:nil RemainTime:1.5];
     });
 }
 
@@ -395,6 +417,7 @@
 //设置导航栏标题
 -(void)setTitle:(id)data {
     _hasNavBar = YES;
+    _leftView.hidden = NO;
     self.navigationController.navigationBar.hidden = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
         _lblFunctionName.text = data;
@@ -452,11 +475,14 @@
                                         [navRightButtonItemMuarry addObject:navRightButtonItem];
                                         
                                     }else {
-                                        UIBarButtonItem *beyondnavRightButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"set"] style:UIBarButtonItemStylePlain target:self action:@selector(showDropMenu:)];
+                                        UIBarButtonItem *beyondnavRightButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"point"] style:UIBarButtonItemStylePlain target:self action:@selector(showDropMenu:)];
                                         beyondnavRightButtonItem.tintColor = [UIColor whiteColor];
                                         beyondnavRightButtonItem.tag = idx + 10000;
                                         [_moretopMenuArray addObject:btnModel];
-                                        [navRightButtonItemMuarry addObject:beyondnavRightButtonItem];
+                                        if (idx == 2) {
+                                            [navRightButtonItemMuarry addObject:beyondnavRightButtonItem];
+                                            
+                                        }
                                         
                                     }
                                     
@@ -490,11 +516,14 @@
                                     [navRightButtonItemMuarry addObject:navRightButtonItem];
                                     
                                 }else {
-                                    UIBarButtonItem *beyondnavRightButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"set"] style:UIBarButtonItemStylePlain target:self action:@selector(showDropMenu:)];
+                                    UIBarButtonItem *beyondnavRightButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(showDropMenu:)];
                                     beyondnavRightButtonItem.tintColor = [UIColor whiteColor];
                                     beyondnavRightButtonItem.tag = idx + 10000;
                                     [_moretopMenuArray addObject:btnModel];
-                                    [navRightButtonItemMuarry addObject:beyondnavRightButtonItem];
+                                    if (idx == 2) {
+                                        [navRightButtonItemMuarry addObject:beyondnavRightButtonItem];
+
+                                    }
                                     
                                     [_navRightButton setTitle:btnModel.name forState:UIControlStateNormal];
                                     
@@ -518,15 +547,24 @@
 //右侧导航栏按钮点击
 -(void)navRightButtonItemClick:(id)sender {
     UIButton *btn = (UIButton*)sender;
+    btn.enabled = NO;
+
     NSLog(@"btn tag === %ld",btn.tag);
     TopRightMenuModel *model = _topMenus [(btn.tag - 1000)];
-    [self executeCallback:model.callback params:nil];}
+    [self executeCallback:model.callback params:nil];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSLog(@"btnClickedOperations");
+        btn.enabled = YES;
+    });
+    
+}
 
 
 //顶部导航栏超过个数用下拉框展示
 -(void)showDropMenu:(id)sender {
-    CGPoint point = CGPointMake(MAINWIDTH -25,STATEBARHEIGHT);
-    JGPopView *view2 = [[JGPopView alloc] initWithOrigin:point Width:100 Height:40 * _moretopMenuArray.count Type:JGTypeOfUpRight Color:[UIColor colorWithHexString:MAIN_COLOR]];
+    CGPoint point = CGPointMake(MAINWIDTH,STATEBARHEIGHT -5);
+    JGPopView *view2 = [[JGPopView alloc] initWithOrigin:point Width:200 Height:40 * _moretopMenuArray.count Type:JGTypeOfUpRight Color:[UIColor colorWithHexString:MAIN_COLOR]];
     NSMutableArray *menuNameArray = [[NSMutableArray alloc] init];
     [_moretopMenuArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [menuNameArray addObject:((TopRightMenuModel*)obj).name];
@@ -644,22 +682,30 @@
 
 //获取位置信息
 - (void)getLocation:(id)data {
+    //NSLog(@"获取位置信息");
     [[LocationHelper sharedInstance] refreshUserLocation];
 }
 
 //位置刷新
 -(void)refreshLocation {
-    JSValue *funcValue = _context[@"getLocation"];
+    
+   JSValue *funcValue = _context[@"setLocation"];
     if (![[funcValue toString] isEqualToString:@"undefined"]) {
-        [self executeCallback:@"setLocation" params:[[LocationHelper sharedInstance].locationModel mj_JSONString] ];
+        //NSLog(@"位置刷新");
+        [self executeCallback:@"setLocation" params:[[LocationHelper sharedInstance].locationModel mj_JSONObject]];
     }
 }
 
 //数据保存
 - (void)postData:(id)url :(id)requestMapping :(id)callback :(id)content :(id)files {
-    HttpRequestHelper *help = [[HttpRequestHelper alloc] init];
-    help.delegate = self;
-    [help postDataWithUrl:url withRequestMapping:requestMapping andCallBack:callback andContent:content withFiles:files];
+    NSDictionary *dic = [callback toArrayOrNSDictionary];
+    _postCallback =  [dic objectForKey:@"callback"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 1.2), dispatch_get_main_queue(), ^{
+        // show statusbar
+        HttpRequestHelper *help = [[HttpRequestHelper alloc] init];
+        help.delegate = self;
+        [help postDataWithUrl:url withRequestMapping:requestMapping andCallBack:callback andContent:content withFiles:files];
+    });
 }
 
 //刷新父窗体
@@ -734,71 +780,82 @@
 
 //导航菜单
 - (void)setNavigator:(id)data {
-    _hasTopMenu = YES;
     NSArray *array = [data toArrayOrNSDictionary];
-    
-    _menuFrame = CGRectMake(0, webViewY, MAINWIDTH, MAINHEIGHT - 45);
-    _searchViews = [[NSMutableArray alloc] initWithCapacity:1];
-    //_departments = [[LOCALMANAGER getDepartments] retain];
-    _topMenuCallBacks = [[NSMutableArray alloc] init];
-    _checkDepartments = [[NSMutableArray alloc] initWithCapacity:0];
-    NSMutableArray *titleArray = [[NSMutableArray alloc] init];
-    [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [titleArray addObject:[obj objectForKey:@"label"]];
-        [_topMenuCallBacks addObject:[obj objectForKey:@"callback"]];
-        if ([[obj objectForKey:@"viewType"] isEqualToString:@"TREE_VIEW"]) {
-            [self showTreeView:nil];
+    if (array.count) {
+        _hasTopMenu = YES;
+        _menuFrame = CGRectMake(0, webViewY, MAINWIDTH, MAINHEIGHT - 45);
+        _searchViews = [[NSMutableArray alloc] initWithCapacity:1];
+        //_departments = [[LOCALMANAGER getDepartments] retain];
+        _topMenuCallBacks = [[NSMutableArray alloc] init];
+        _checkDepartments = [[NSMutableArray alloc] initWithCapacity:0];
+        NSMutableArray *titleArray = [[NSMutableArray alloc] init];
+        [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [titleArray addObject:[obj objectForKey:@"label"]];
+            [_topMenuCallBacks addObject:[obj objectForKey:@"callback"]];
+            if ([[obj objectForKey:@"viewType"] isEqualToString:@"TREE_VIEW"]) {
+                [self showTreeView:nil];
+                
+            }else if ([[obj objectForKey:@"viewType"] isEqualToString:@"REGION_VIEW"]) {
+                //地区选择
+                [self showRegion];
+                
+            }else if ([[obj objectForKey:@"viewType"] isEqualToString:@"LIST_VIEW"]) {
+                NSMutableArray *mulListArray = [obj objectForKey:@"viewFieldList"];
+                NSMutableArray*  dataList = [[NSMutableArray alloc] init];
+                [mulListArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    JSmodel *jsmodel = [[JSmodel alloc] init];
+                    jsmodel.fieldName = [obj objectForKey:@"name"];
+                    jsmodel.fieldLabel = [obj objectForKey:@"label"];
+                    jsmodel.value = [obj objectForKey:@"value"];
+                    [dataList addObject:jsmodel];
+                }];
+                
+                [self showSingleDropListView:dataList];
+                
+                
+            }else if ([[obj objectForKey:@"viewType"] isEqualToString:@"COMPLEX_VIEW"]) {
+                NSMutableArray *complexArray = [obj objectForKey:@"viewFieldList"];
+                //            JSmodel *jsmodel = [[JSmodel alloc] init];
+                //            jsmodel.fieldName = [obj objectForKey:@"name"];
+                //            jsmodel.fieldLabel = [obj objectForKey:@"label"];
+                //            jsmodel.value = [obj objectForKey:@"value"];
+                
+                [self showComplexSearchView:complexArray];
+            }
             
-        }else if ([[obj objectForKey:@"viewType"] isEqualToString:@"REGION_VIEW"]) {
-            //地区选择
-            [self showRegion];
-            
-        }else if ([[obj objectForKey:@"viewType"] isEqualToString:@"LIST_VIEW"]) {
-            NSMutableArray *mulListArray = [obj objectForKey:@"viewFieldList"];
-            NSMutableArray*  dataList = [[NSMutableArray alloc] init];
-            [mulListArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                JSmodel *jsmodel = [[JSmodel alloc] init];
-                jsmodel.fieldName = [obj objectForKey:@"name"];
-                jsmodel.fieldLabel = [obj objectForKey:@"label"];
-                jsmodel.value = [obj objectForKey:@"value"];
-                [dataList addObject:jsmodel];
-            }];
-            
-            [self showSingleDropListView:dataList];
-            
-            
-        }else if ([[obj objectForKey:@"viewType"] isEqualToString:@"COMPLEX_VIEW"]) {
-            NSMutableArray *complexArray = [obj objectForKey:@"viewFieldList"];
-            //            JSmodel *jsmodel = [[JSmodel alloc] init];
-            //            jsmodel.fieldName = [obj objectForKey:@"name"];
-            //            jsmodel.fieldLabel = [obj objectForKey:@"label"];
-            //            jsmodel.value = [obj objectForKey:@"value"];
-            
-            [self showComplexSearchView:complexArray];
-        }
+        }];
         
-    }];
-    
-    _headerBar = [[HeaderSearchBar alloc] initWithFrame:CGRectMake(0, STATEBARHEIGHT, MAINWIDTH, 45)];
-    _headerBar.titles = titleArray;
-    NSMutableArray *iconMuarray = [[NSMutableArray alloc] init];
-    for (int i = 0; i < titleArray.count; i ++) {
-        [iconMuarray addObject:@""];
+        if (!_headerBar) {
+          _headerBar = [[HeaderSearchBar alloc] initWithFrame:CGRectMake(0, STATEBARHEIGHT, MAINWIDTH, 45)];
+
+        }
+        _headerBar.titles = titleArray;
+        NSMutableArray *iconMuarray = [[NSMutableArray alloc] init];
+        for (int i = 0; i < titleArray.count; i ++) {
+            [iconMuarray addObject:@""];
+        }
+        _headerBar.icontitles = iconMuarray;
+        _headerBar.backgroundColor = [UIColor whiteColor];
+        _headerBar.delegate = self;
+        [self.view addSubview:_headerBar];
+    } else {
+        _hasTopMenu = NO;
+        if (_headerBar) {
+            [_headerBar removeFromSuperview];
+        }
     }
-    _headerBar.icontitles = iconMuarray;
-    _headerBar.backgroundColor = [UIColor whiteColor];
-    _headerBar.delegate = self;
-    [self.view addSubview:_headerBar];
-    
-}
+ }
 
 //获取手机型号
 -(NSString*)getDeviceModel {
-    if (![[LocalHelper sharedInstance] getValueFromUserDefaultsWithKey:kDeviceId]){
+    /*if (![[LocalHelper sharedInstance] getValueFromUserDefaultsWithKey:kDeviceId]){
         [[LocalHelper sharedInstance] saveValueToUserDefaultsWithKey:[UIDevice deviceId] key:kDeviceId];
     }
     
-    NSString* deviceid = [[LocalHelper sharedInstance] getValueFromUserDefaultsWithKey:kDeviceId];
+    NSString* deviceid = [[LocalHelper sharedInstance] getValueFromUserDefaultsWithKey:kDeviceId];*/
+    //从keychain中获取deviceID，兼容上个版本。
+    NSString* deviceid = [[LocalHelper sharedInstance] getDeviceUUID];
+    
     DeviceModel *model = [[DeviceModel alloc] init];
     model.sdk = @"";
     model.version = [UIDevice osVersion];
@@ -910,7 +967,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         NSArray * arr = dict[@"images"];
-        if(!arr.count){
+        if(!arr.count || [[arr[0] class] isEqual:[NSNull class]]){
             return;
         }
         if ([arr[0] hasPrefix:@"http://"] ||[arr[0] hasPrefix:@"https://"] ) {
@@ -994,6 +1051,13 @@
     [self presentViewController:navCtrl animated:YES completion:nil];
 }
 
+
+//二维码  生成/扫描 (From https://github.com/kingsic/SGQRCode)
+-(void)show2dCode:(id)data {
+  
+}
+
+//移除
 - (void)cancel {
     [_dateRangePopView removeFromSuperview];
 }
@@ -1002,13 +1066,129 @@
     
 }
 
+//设置底部角标
+-(void)setTabbarBadge:(id)index :(id)number {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 1.2), dispatch_get_main_queue(), ^{
+        // show statusbar
+        _footMenu.badgeIndex = [(NSNumber*)index integerValue];
+        _footMenu.badgeNumber = [(NSNumber*)number integerValue];
+        [_footMenu setbadge];
+    });
+}
 
-- (void)setBottomBadge:(id)data {
+//底部菜单
+- (void)setTabbar:(id)data {
+    NSArray *footArray = [data toArrayOrNSDictionary];
+    if (footArray.count) {
+        _hasbottomMenu = YES;
+
+        _footModelMuarry = [[NSMutableArray alloc] init];
+        [footArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            BottomMenuModel *model = [BottomMenuModel menuWithDict:obj];
+            model.activeIcon = obj[@"activeIcon"];
+            model.defaultIcon = obj[@"defaultIcon"];
+            model.name = obj[@"name"];
+            model.url = obj[@"url"];
+            
+            [_footModelMuarry addObject:model];
+        }];
+        
+        if (!_footMenu) {
+//           _footMenu = [[FootMenuView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT - footY, MAINWIDTH, footBarHeight)];
+            NSMutableArray *titleMuarray = [[NSMutableArray alloc] init];
+            NSMutableArray *defaultIconMuarray = [[NSMutableArray alloc] init];
+            NSMutableArray *activeIconMuarray = [[NSMutableArray alloc] init];
+            
+            
+            [_footModelMuarry enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [titleMuarray addObject:((BottomMenuModel*)obj).name];
+                [defaultIconMuarray addObject:((BottomMenuModel*)obj).defaultIcon];
+                [activeIconMuarray addObject:((BottomMenuModel*)obj).activeIcon];
+                
+                
+            }];
+            
+//            _footMenu.titles = titleMuarray;
+//            _footMenu.defaultIcons = defaultIconMuarray;
+//            _footMenu.activeIcons = activeIconMuarray;
+//            _footMenu.delegate = self;
+            _footMenu = [[FootMenuView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT - footY, MAINWIDTH, footBarHeight) titleArray:titleMuarray anddefaultImagArray:defaultIconMuarray andActive:activeIconMuarray delegate:self];
+            [self.view addSubview:_footMenu];
+         }
+        
+        
+    }else {
+        _hasbottomMenu = NO;
+        if (_footMenu) {
+            [_footMenu removeFromSuperview];
+        }
+    }
     
 }
 
-- (void)setFootMenu:(id)data {
+//打开WIfi设置
+-(void)openWifiSetting {
+    //ios10 移除了canOpenURL的方法 ，不能跳到WiFi列表页，用信息提醒
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+        [MBProgressHUD showAutoMessage:@"请前往设置列表打开WIFI" ToView:self.view];
+
+        return;
+        
+    }
+    //ios 10 之前
+    NSURL *url = [NSURL URLWithString:@"prefs:root=WIFI"];
+    if ([[UIApplication sharedApplication] canOpenURL:url])
+    {
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
+
+//获取wifi信息
+-(NSString*)getCurrentWifi {
+    WifiModel *model = [[WifiModel alloc] init];
+    model.name = [self getWifiName];
+    model.macAddress = [self getMacAddress];
     
+    if (model.name.length) {
+        return [model mj_JSONString];
+
+    }else{
+        return @"{}";
+    }
+}
+
+// 获取wifi 名称
+-(NSString*)getWifiName {
+    id info = nil;
+    NSArray *ifs = ( id)CFBridgingRelease(CNCopySupportedInterfaces());
+    for (NSString *ifnam in ifs) {
+        info = (id)CFBridgingRelease(CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifnam));
+        _wifiNameString = info[@"SSID"];
+    }
+    
+    return _wifiNameString;
+}
+
+//获取mac地址
+-(NSString*)getMacAddress {
+    id info = nil;
+    NSArray *ifs = ( id)CFBridgingRelease(CNCopySupportedInterfaces());
+    for (NSString *ifnam in ifs) {
+        info = (id)CFBridgingRelease(CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifnam));
+        // mac 地址省略情况 补0
+        NSArray *macArr = [info[@"BSSID"] componentsSeparatedByString:@":"];
+        NSMutableArray *mulArray = [[NSMutableArray alloc]init];
+        [macArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (((NSString*)obj).length == 1) {
+                obj = [NSString stringWithFormat:@"0%@",obj];
+            }
+            [mulArray addObject:obj];
+        }];
+        
+        _macAddrString =  [mulArray componentsJoinedByString:@":"];
+        
+    }
+    return _macAddrString;
 }
 
 - (void)readFile:(id)data {
@@ -1067,6 +1247,16 @@
     
 }
 
+//点击底部菜单
+-(void) FootMenuViewClickBtn:(int) index current:(int) current {
+    NSLog(@"点击了底部菜单 index = %d current = %d" ,index,current);
+    BottomMenuModel *model = _footModelMuarry[index];
+    //本地测试代码
+    dispatch_async(dispatch_get_main_queue(), ^{
+       [self loadRequestWithURLString:model.url];;
+    });
+}
+
 //根据URL地址打开窗体
 -(void)goToNewPageWithUrlString:(NSString *)urlString params:(NSDictionary *)params {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -1118,10 +1308,17 @@
 #pragma mark - 网络加载html
 //根据URL地址加载webview
 - (void)loadRequestWithURLString:(NSString *)strURL{
+    [MBProgressHUD showLoadToView:self.view];
+
     if (strURL.length == 0){
         [self loadFailHTMLFromLocal];
         NSLog(@"Cannont load nil url.");
         return;
+    }
+    
+    if (![strURL containsString:@"error"] ) {
+        _urlString = strURL;
+        DLog(@"Save current url:%@",_urlString);
     }
     
     if ([strURL containsString:@"assets/index.html"]) {
@@ -1130,36 +1327,50 @@
         NSURL*Url = [NSURL fileURLWithPath:path];
         [_webView loadRequest:[NSURLRequest requestWithURL:Url]];
         //********
-    } else  if([strURL containsString:@"assets/detail.html"]){
+    } else  if([strURL containsString:@"assets/add.html"]){
+        //测试代码**
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"add" ofType:@"html" inDirectory:@"assets"];
+        NSURL*Url = [NSURL fileURLWithPath:path];
+        [_webView loadRequest:[NSURLRequest requestWithURL:Url]];
+        //********
+    }else  if ([strURL containsString:@"assets/detail.html"]){
         //测试代码**
         NSString *path = [[NSBundle mainBundle] pathForResource:@"detail" ofType:@"html" inDirectory:@"assets"];
         NSURL*Url = [NSURL fileURLWithPath:path];
         [_webView loadRequest:[NSURLRequest requestWithURL:Url]];
-        //********
     }else{
         NSURL *url = [NSURL URLWithString:strURL];
         NSURLRequest *request =[NSURLRequest requestWithURL:url
                                                 cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                            timeoutInterval:TIME_OUT];
+                                            timeoutInterval:kTimeOut];
         [_webView loadRequest:request];
         
         //判读返回代码
-        NSURLSessionDataTask * dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        /*NSURLSessionDataTask * dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
             DLog(@"Http response statusCode:%ld", httpResponse.statusCode);
-            
+            DLog(@"%@",error);
             if (httpResponse.statusCode == 404){
                 [self loadFailHTMLFromLocal];
             }
         }];
-        [dataTask resume];
+        [dataTask resume];*/
         
         if (_connection){
             [_connection cancel];
             DLog(@"safe release connection");
         }
+        if (_timerOutTimer){
+            [_timerOutTimer invalidate];
+        }
+        _timerOutTimer = [NSTimer scheduledTimerWithTimeInterval:kTimeOut target: self selector: @selector(handleTimeOut) userInfo:self repeats:NO];
         _connection= [[NSURLConnection alloc]initWithRequest:request delegate:self startImmediately:YES];
     }
+}
+
+-(void) handleTimeOut{
+    [self connection:_connection didFailWithError:[NSError errorWithDomain:@"执行超时" code:256 userInfo:nil]];
+    [_timerOutTimer invalidate];
 }
 
 //网络异常加载本地文件
@@ -1181,7 +1392,7 @@
     if ([response isKindOfClass:[NSHTTPURLResponse class]]){
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
         if ((([httpResponse statusCode]/100) == 2)){
-            NSLog(@"connection ok");
+            DLog(@"connection ok");
         }
         else{
             NSError *error = [NSError errorWithDomain:@"HTTP" code:[httpResponse statusCode] userInfo:nil];
@@ -1189,6 +1400,7 @@
                 DLog(@"404");
                 
             }
+            [self loadFailHTMLFromLocal];
         }
     }
 }
@@ -1199,14 +1411,14 @@
         _connection = nil;
     }
     if (error.code == 22) //The operation couldn’t be completed. Invalid argument
-        NSLog(@"22");
+        ;
     else if (error.code == -1001) //The request timed out.  webview code -999的时候会收到－1001，这里可以做一些超时时候所需要做的事情，一些提示什么的
-        NSLog(@"-1001");
+        ;
     else if (error.code == -1005) //The network connection was lost.
-        NSLog(@"-1005");
-    else if (error.code == -1009){ //The Internet connection appears to be offline
-        NSLog(@"-1009");
-    }
+        ;
+    else if (error.code == -1009) //The Internet connection appears to be offline
+        ;
+    DLog(@"error:%@,code:%ld",error,error.code);
     [self loadFailHTMLFromLocal];
 
 }
@@ -1214,6 +1426,7 @@
 //网络状态的监听
 //通知监听回调 网络状态发送改变 系统会发出一个kReachabilityChangedNotification通知，然后会触发此回调方法
 - (void)netStatusChange:(NSNotification *)noti{
+    [self executeCallback:@"onBroadcastReceiver" params:@[@"Broadcast_Wifi_Connected"]];
     NSLog(@"Notification: %@",noti.userInfo);
     //判断网络状态
     switch (_hostReach.currentReachabilityStatus) {
@@ -1339,13 +1552,12 @@
 
 - (void)showLoading:(id)data {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD showMessage:@"加载中" ToView:self.view];
+        [MBProgressHUD showMessage:nil ToView:self.view];
     });
 }
 
 - (void)hideLoading:(id)data {
     dispatch_async(dispatch_get_main_queue(), ^{
-        //[MBProgressHUD hideHUD];
         [MBProgressHUD hideHUDForView:self.view];
     });
 }
@@ -1758,11 +1970,12 @@
 
 //HttpRequest代理请求成功 返回数据
 -(void)receiveMessage:(id)message {
-    [self executeCallback:@"saveCallback" params:message];
+    [self executeCallback:_postCallback params:message];
 }
 
 - (void) didFailWithError:(NSError *)error {
-    [self executeCallback:@"saveCallback" params:error];
+    [MBProgressHUD hideHUDForView:self.view];
+    [self executeCallback:_postCallback params:error];
     
 }
 
@@ -1770,7 +1983,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end
 

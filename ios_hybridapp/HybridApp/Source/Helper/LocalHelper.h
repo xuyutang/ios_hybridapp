@@ -19,6 +19,13 @@
 -(void)removeFromUserDefaultsWithKey:(NSString *)key;
 -(void)saveValueToUserDefaultsWithKey:(id)value key:(NSString *)key;
 
+//KeyChain
+-(NSString*)getValueFromKeychainWithKey:(NSString *)key;
+-(void)removeFromKeychainWithKey:(NSString *)key;
+-(void)saveValueToKeychainWithKey:(id)value key:(NSString *)key;
+
+-(NSString*)getDeviceUUID;
+
 /*
  * 获取省、市、区
  */

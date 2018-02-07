@@ -1,15 +1,15 @@
 10
 
 dir
-31046
+31448
 http://xuyutang%40juicyshare.cc@svn.juicyshare.cc/repo/winetone/trunk/telecom/ios_hybridapp/HybridApp/Source/Vender
 http://xuyutang%40juicyshare.cc@svn.juicyshare.cc/repo/winetone
 
 
 
-2018-01-22T17:50:30.787855Z
-30947
-lzhang@cn.ufinity.com
+2018-02-06T09:39:16.837118Z
+31422
+xuyutang@juicyshare.cc
 
 
 
@@ -36,6 +36,9 @@ BSLCalendar
 dir
 
 KLCPopup
+dir
+
+QRCode
 dir
 
 ProtocolBuffers

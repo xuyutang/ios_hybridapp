@@ -100,14 +100,14 @@ var	App = function () {
 				app.dial(number);
 			}
 		},
-		setFootMenu:function(menu){
-		    if (userAgentInfo.indexOf(agent_android) >= 0){
-		        app.setFootMenu(JSON.stringify(menu));
-		    } else if (userAgentInfo.indexOf(agent_ios) >= 0){
-		    	app.setFootMenu(JSON.stringify(menu));
-		    } else{
-		    }
-		},
+    setTabbar:function(menu){
+        if (userAgentInfo.indexOf(agent_android) >= 0){
+            app.setTabbar(JSON.stringify(menu));
+        } else if (userAgentInfo.indexOf(agent_ios) >= 0){
+            app.setTabbar(JSON.stringify(menu));
+        } else{
+        }
+    },
 		openNew:function(url){
 			if (userAgentInfo.indexOf(agent_android) >= 0){
 				//app.openNew(JSON.stringify(url));
@@ -118,11 +118,18 @@ var	App = function () {
 			}
 		},
 		setNavigator:function(arr){
-			if (userAgentInfo.indexOf(agent_android) >= 0){
-				app.setNavigator(JSON.stringify(arr));
-			} else if (userAgentInfo.indexOf(agent_ios) >= 0){
-				app.setNavigator(JSON.stringify(arr));
-			} else {
+			if (userAgentInfo.indexOf(agent_android) >= 0) {
+				if (arr == null || arr.length == 0) {
+					app.setNavigator(arr);
+				} else {
+					app.setNavigator(JSON.stringify(arr));
+				}
+			} else if (userAgentInfo.indexOf(agent_ios) >= 0) {
+				if (arr == null || arr.length == 0) {
+					app.setNavigator(arr);
+				} else {
+					app.setNavigator(JSON.stringify(arr));
+				}
 			}
 		},
 		close:function(){
@@ -133,14 +140,20 @@ var	App = function () {
 			} else {
 			}
 		},
-		dragRefresh:function(){
-			if (userAgentInfo.indexOf(agent_android) >= 0){
-				app.dragRefresh();
-			} else if (userAgentInfo.indexOf(agent_ios) >= 0){
-				app.dragRefresh();
-			} else {
-			}
-		},
+      dragRefresh:function(allowDrag){
+        if (userAgentInfo.indexOf(agent_android) >= 0){
+            if(typeof allowDrag == 'boolean' && false == allowDrag){
+                app.dragRefresh(false);
+            }else{
+                app.dragRefresh(true);
+            }
+        } else if (userAgentInfo.indexOf(agent_ios) >= 0){
+            if(typeof allowDrag == 'boolean' && false == allowDrag){
+                app.dragRefresh(false);
+            }else{
+                app.dragRefresh(true);
+            }
+        },
 		prompt:function(message){
 			if (userAgentInfo.indexOf(agent_android) >= 0){
 				app.prompt(''+message);
@@ -290,16 +303,13 @@ var	App = function () {
                }
            },
 
-   		setBottomBadge:function(index,str){//
-     	   if (userAgentInfo.indexOf(agent_android) >= 0){
-     		   app.setBottomBadge(index,str);
-     	   } else if (userAgentInfo.indexOf(agent_ios) >= 0){
-     	   		app.setBottomBadge({index:index, str:str});
-     	   }
-     	   else {
-
-     	   }
-        },
+    setTabbarBadge:function(index,str){
+        if (userAgentInfo.indexOf(agent_android) >= 0){
+            app.setTabbarBadge(index,str);
+        } else if (userAgentInfo.indexOf(agent_ios) >= 0){
+            app.setTabbarBadge(index,str);
+        }
+    },
 
         postData:function(url,requestMapping,callback,content,files){
                if (userAgentInfo.indexOf(agent_android) >= 0){
@@ -370,6 +380,20 @@ var	App = function () {
             } else if (userAgentInfo.indexOf(agent_ios) >= 0) {
                   app.closeForResult(JSON.stringify(config));
             }
+        },
+    getCurrentWifi:function(){
+        if (userAgentInfo.indexOf(agent_android) >= 0) {
+            return app.getCurrentWifi();
+        } else if (userAgentInfo.indexOf(agent_ios) >= 0) {
+            return app.getCurrentWifi();
         }
+    },
+    openWifiSetting:function(){
+        if (userAgentInfo.indexOf(agent_android) >= 0) {
+            app.openWifiSetting();
+        } else if (userAgentInfo.indexOf(agent_ios) >= 0) {
+            app.openWifiSetting();
+        }
+    }
 	}
 }();

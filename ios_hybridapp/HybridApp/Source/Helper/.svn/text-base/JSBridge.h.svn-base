@@ -37,7 +37,7 @@
 //选择省市区
 -(void)selector:(id)data;
 //设置底部菜单
--(void)setFootMenu:(id)data;
+-(void)setTabbar:(id)data;
 //读取文件
 -(void)readFile:(id)data;
 //查看大图
@@ -87,7 +87,7 @@
 //顶部消息
 -(void)topMessage:(id)data;
 //设置底部
--(void)setBottomBadge:(id)data;
+-(void)setTabbarBadge:(id)index :(id)number;
 //设置标题图标
 -(void)setTitleIcon:(id)data;
 //POST
@@ -113,6 +113,10 @@
 -(NSString*)getUrl;
 //关闭窗口回传参数
 -(void)closeForResult:(id)data;
+//打开WiFi设置
+-(void)openWifiSetting;
+//获取WiFi
+-(NSString*)getCurrentWifi;
 
 @end
 

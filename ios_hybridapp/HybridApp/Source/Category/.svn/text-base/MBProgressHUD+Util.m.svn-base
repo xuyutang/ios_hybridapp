@@ -9,6 +9,8 @@
 #import "MBProgressHUD+Util.h"
 #import "DeviceConstant.h"
 
+#define kHUDSize CGSizeMake(120.f, 100.f)
+
 @implementation MBProgressHUD (Util)
 
 #pragma mark 显示错误信息
@@ -45,6 +47,7 @@
     hud.label.text=message;
     hud.label.font=CHINESE_SYSTEM(15);
     hud.label.textColor = [UIColor whiteColor];
+    hud.minSize = kHUDSize;
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     //代表需要蒙版效果
@@ -59,7 +62,7 @@
 
 //加载视图
 +(void)showLoadToView:(UIView *)view{
-    [self showMessage:@"加载中..." ToView:view];
+    [self showMessage:@"" ToView:view];
 }
 
 
@@ -86,20 +89,30 @@
 
 //自动消失提示，无图
 + (void)showAutoMessage:(NSString *)message ToView:(UIView *)view{
-    [self showMessage:message ToView:view RemainTime:1 Model:MBProgressHUDModeText];
+    [self showMessage:message ToView:view RemainTime:1 Model:MBProgressHUDModeText Offset:CGPointMake(0.f,0.f)  userInteractionEnabled:YES];
 }
 
 //自定义停留时间，有图
 +(void)showIconMessage:(NSString *)message ToView:(UIView *)view RemainTime:(CGFloat)time{
-    [self showMessage:message ToView:view RemainTime:time Model:MBProgressHUDModeIndeterminate];
+    [self showMessage:message ToView:view RemainTime:time Model:MBProgressHUDModeIndeterminate Offset:CGPointMake(0.f,0.f) userInteractionEnabled:YES];
 }
 
 //自定义停留时间，无图
 +(void)showMessage:(NSString *)message ToView:(UIView *)view RemainTime:(CGFloat)time{
-    [self showMessage:message ToView:view RemainTime:time Model:MBProgressHUDModeText];
+    [self showMessage:message ToView:view RemainTime:time Model:MBProgressHUDModeText Offset:CGPointMake(0.f,0.f) userInteractionEnabled:YES];
 }
 
-+(void)showMessage:(NSString *)message ToView:(UIView *)view RemainTime:(CGFloat)time Model:(MBProgressHUDMode)model{
+//自定义停留时间，无图，底部显示
++(void)showTextMessage:(NSString *)message ToView:(UIView *)view RemainTime:(CGFloat)time{
+    [self showMessage:message ToView:view RemainTime:time Model:MBProgressHUDModeText Offset:CGPointMake(0.f, MBProgressMaxOffset) userInteractionEnabled:YES];
+}
+
+//无图，非模态
++(void)showMessageWithNoModel:(NSString *)message RemainTime:(CGFloat)time{
+    [self showMessage:message ToView:nil RemainTime:time Model:MBProgressHUDModeText Offset:CGPointMake(0.f,0.f) userInteractionEnabled:NO];
+}
+
++(void)showMessage:(NSString *)message ToView:(UIView *)view RemainTime:(CGFloat)time Model:(MBProgressHUDMode)model Offset:(CGPoint) offset userInteractionEnabled:(BOOL)userInteractionEnabled{
     
     if (view == nil) view = (UIView*)[UIApplication sharedApplication].delegate.window;
     // 快速显示一个提示信息
@@ -111,7 +124,7 @@
     hud.detailsLabel.text=message;
     hud.detailsLabel.font=CHINESE_SYSTEM(15);
     hud.detailsLabel.textColor = [UIColor redColor];
-    
+    hud.detailsLabel.textAlignment = 0;
     hud.contentColor = [UIColor whiteColor];
     //模式
     hud.mode = model;
@@ -121,6 +134,13 @@
     hud.dimBackground = YES;
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
+    // 判读位置
+    if (!CGPointEqualToPoint(offset, CGPointMake(0.f,0.f))) {
+        hud.offset = offset;
+    }
+    hud.minSize = kHUDSize;
+    if (!userInteractionEnabled)
+        hud.userInteractionEnabled = NO;
     // X秒之后再消失
     [hud hideAnimated:YES afterDelay:time];
     
@@ -148,6 +168,7 @@
     // 3秒之后再消失
     [hud hideAnimated:YES afterDelay:1];
 }
+
 
 + (void)hideHUDForView:(UIView *)view
 {

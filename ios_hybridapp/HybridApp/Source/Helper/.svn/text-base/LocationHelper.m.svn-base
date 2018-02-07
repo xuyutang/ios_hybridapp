@@ -15,6 +15,11 @@
 //只引入所需的单个头文件
 #import <BaiduMapAPI_Map/BMKMapView.h>
 #import "DeviceConstant.h"
+#import "MBProgressHUD+Util.h"
+
+#define kGpsDuration                10.0
+#define kCheckLocationTimes         10
+#define khorizontalAccuracy         3000
 
 @interface LocationHelper() <BMKMapViewDelegate,BMKGeneralDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>{
     NSString* _baiduKey;
@@ -26,7 +31,8 @@
     BMKGeoCodeSearch *_search;
     
     NSTimeInterval _lastExecTime;
-
+    NSTimer *_gpsTimer;
+    BOOL _isRunning;
 }
 
 @end
@@ -61,6 +67,7 @@
     _search = nil;
     
     _locationModel = nil;
+    _isRunning = FALSE;
 }
 
 - (void) initBM{
@@ -109,26 +116,46 @@
  *用户位置更新后，会调用此函数
  *@param userLocation 新的用户位置
  */
-- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation {
-    NSTimeInterval curExecTime = [[NSDate date] timeIntervalSince1970];
-    long long int lastExecSec = (long long int)_lastExecTime;
-    long long int curExecSec = (long long int)curExecTime;
-    
-    if ((curExecSec - lastExecSec) < 10){
-        //DLog(@"Should be not update loaction in 10 sec.");
+- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation{
+// - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation {
+    //DLog(@"%f,%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    if ([self checkRepeatLocation])
         return;
-    }
+    
+    _lastExecTime = [[NSDate date] timeIntervalSince1970];
     
     _dLatitude = userLocation.location.coordinate.latitude;
     _dLongitude = userLocation.location.coordinate.longitude;
     //发起反地理编码
+    
+    if ((_dLatitude < 0) || (_dLongitude < 0)) return;
+    
+    if (_locationModel)
+        _locationModel = nil;
+    _locationModel = [[LocationModel alloc] init];
+    _locationModel.longitude = _dLongitude;
+    _locationModel.latitude = _dLatitude;
+    _locationModel.address = [NSString stringWithFormat:@"%f,%f",_dLongitude,_dLatitude];
+    
+    DLog(@"%@",_locationModel.address);
+
+    if (userLocation.location.horizontalAccuracy > khorizontalAccuracy){
+        [MBProgressHUD showMessageWithNoModel:@"当前GPS信号弱，请稍后刷新重试。" RemainTime:2.0];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateLocationNotification object:nil];
+        return;
+    }
+    
     CLLocationCoordinate2D pt = (CLLocationCoordinate2D){_dLatitude, _dLongitude};
     BMKReverseGeoCodeOption *reverseGeocodeSearchOption = [[BMKReverseGeoCodeOption alloc]init];
     reverseGeocodeSearchOption.reverseGeoPoint = pt;
     BOOL flag = [_search reverseGeoCode:reverseGeocodeSearchOption];
     
-    if(!flag)
+    if(!flag){
         DLog(@"百度地图反geo检索发送失败");
+    }
+    //发送广播通知UI更新地址
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateLocationNotification object:nil];
+
 }
 
 - (void)didFailToLocateUserWithError:(NSError *)error{
@@ -138,7 +165,7 @@
 -(void) onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
     if (error == 0) {
         _lastAddress = [result.address copy];
-
+    
         LocationModel *locationModel = [[LocationModel alloc] init];
         locationModel.latitude = _dLatitude;
         locationModel.longitude = _dLongitude;
@@ -153,33 +180,103 @@
             _locationModel = nil;
         _locationModel = locationModel;
         
-        //DLog(@"%@",locationModel.address);
-        //发送广播通知UI更新地址
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateLocationNotification object:nil];
-        
-        _lastExecTime = [[NSDate date] timeIntervalSince1970];
-
+        DLog(@"%f,%f,%@",locationModel.longitude,locationModel.latitude,locationModel.address);
     }
+    //发送广播通知UI更新地址
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateLocationNotification object:nil];
+    //[self stopUserLocationService];
 }
 
 - (void)refreshUserLocation{
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateLocationNotification object:nil];
+    if ([self checkRepeatLocation])
+        return;
+    
+    if (![self checkCLAuthorizationStatus]){
+        if (_locationModel)
+            _locationModel = nil;
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateLocationNotification object:nil];
+    }else{
+        [self stopUserLocationService];
+        [self startUserLocationService];
+    }
 }
 
 - (void)startUserLocationService{
-    if ([CLLocationManager locationServicesEnabled]) {
-        [_locService startUserLocationService];
-        DLog(@"百度地图启动定位服务");
-    }else{
+    /*if(_gpsTimer == nil){
+        _gpsTimer = [NSTimer scheduledTimerWithTimeInterval:GPS_DURATION target:self selector:@selector(starLocationService) userInfo:nil repeats:YES];
+    }*/
+    if (![self checkCLAuthorizationStatus]){
         [_locService stopUserLocationService];
-        _locationModel = nil;
-        DLog(@"本机定位关闭");
+    }else{
+        [self starLocationService];
     }
 }
 
 - (void)stopUserLocationService{
-    //[_gpsTimer setFireDate:[NSDate distantFuture]];
+    if (_locationModel)
+        _locationModel = nil;
     [_locService stopUserLocationService];
     DLog(@"百度地图关闭定位服务");
 }
+
+- (void)starLocationService{
+    if (![self checkCLAuthorizationStatus]){
+        if (_locationModel)
+            _locationModel = nil;
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateLocationNotification object:nil];
+        return;
+    }
+    [_locService startUserLocationService];
+    DLog(@"百度地图启动定位服务");
+}
+
+- (void)openLocationSetting{
+    if (CURRENT_OS_VERSION >= IOS8) {
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=LOCATION_SERVICES"]];
+    }
+}
+
+- (void)trunOnUserLocationService{
+    [self startUserLocationService];
+    //[_gpsTimer setFireDate:[NSDate distantPast]];
+}
+
+- (void)trunOffUserLocationService{
+    [self stopUserLocationService];
+    //[_gpsTimer setFireDate:[NSDate distantFuture]];
+}
+
+- (BOOL)checkRepeatLocation{
+    NSTimeInterval curExecTime = [[NSDate date] timeIntervalSince1970];
+    long long int lastExecSec = (long long int)_lastExecTime;
+    long long int curExecSec = (long long int)curExecTime;
+    
+    if ((curExecSec - lastExecSec) < kCheckLocationTimes){
+        //DLog(@"Should be not update loaction in 10 sec.");
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateLocationNotification object:nil];
+        return TRUE;
+    }
+    return FALSE;
+}
+
+//检测是否打开定位
+- (BOOL)checkCLAuthorizationStatus{
+    if ([CLLocationManager locationServicesEnabled] == NO){
+        [MBProgressHUD showMessageWithNoModel:@"当前设备禁用了定位服务，请前往设置开启。" RemainTime:2.0];
+        return FALSE;
+    }else{
+        CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+        if (kCLAuthorizationStatusDenied == status || kCLAuthorizationStatusRestricted == status) {
+            [MBProgressHUD showMessageWithNoModel:@"当前设备未开启定位，请前往设置开启。" RemainTime:2.0];
+            return FALSE;
+        }
+        return TRUE;
+    }
+}
+
 @end

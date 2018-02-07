@@ -32,6 +32,10 @@
 
 #define MAINWIDTH SCREENWIDTH
 #define tabBarHeight 45
+#define footBarHeight 50
+#define footY (iPhoneX ? 84:50)
+
+
 #define webViewY STATEBARHEIGHT + tabBarHeight
 
 #define TABLEVIEWHEADERHEIGHT 3.f
@@ -41,7 +45,6 @@
 #define PATH_OF_DOCUMENT    [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 #define APPDELEGATE ((AppDelegate*)[[UIApplication sharedApplication] delegate])
 
-#define TIME_OUT 30
 #define MAIN_COLOR  @"#EC290B"
 #define LOCALMANAGER [LocalHelper sharedInstance]
 
@@ -54,5 +57,9 @@
 //中文字体
 #define CHINESE_FONT_NAME  @"Heiti SC"
 #define CHINESE_SYSTEM(x) [UIFont fontWithName:CHINESE_FONT_NAME size:x]
+
+#ifndef AlertShowMsg
+#define AlertShowMsg(msg) {UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];[alertView show];}
+#endif
 
 #endif /* DeviceConstant_h */

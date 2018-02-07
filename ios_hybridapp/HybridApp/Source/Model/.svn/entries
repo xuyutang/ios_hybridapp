@@ -1,15 +1,15 @@
 10
 
 dir
-31046
+31448
 http://xuyutang%40juicyshare.cc@svn.juicyshare.cc/repo/winetone/trunk/telecom/ios_hybridapp/HybridApp/Source/Model
 http://xuyutang%40juicyshare.cc@svn.juicyshare.cc/repo/winetone
 
 
 
-2018-01-23T16:31:06.891741Z
-31001
-lzhang@cn.ufinity.com
+2018-02-01T07:37:37.735613Z
+31328
+xuyutang@juicyshare.cc
 
 
 
@@ -60,17 +60,17 @@ lzhang@cn.ufinity.com
 
 543
 
-AppSessionBoard.pb.h
+AppSessionResponseModel.m
 file
 
 
 
 
-2018-01-22T17:50:30.000000Z
-e0f59126382cd3b722bac84b8dd11112
-2018-01-22T17:50:30.787855Z
-30947
-lzhang@cn.ufinity.com
+2018-02-01T03:36:46.000000Z
+ea69afc85bdf3f96154241b042354332
+2018-02-01T03:36:46.042735Z
+31312
+xuyutang@juicyshare.cc
 
 
 
@@ -92,7 +92,7 @@ lzhang@cn.ufinity.com
 
 
 
-11229
+239
 
 VideoModel.m
 file
@@ -127,6 +127,40 @@ lzhang@cn.ufinity.com
 
 
 195
+
+AppSessionBoard.pb.h
+file
+
+
+
+
+2018-01-22T17:50:30.000000Z
+e0f59126382cd3b722bac84b8dd11112
+2018-01-22T17:50:30.787855Z
+30947
+lzhang@cn.ufinity.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+11229
 
 JSmodel.h
 file
@@ -298,40 +332,6 @@ lzhang@cn.ufinity.com
 
 788
 
-DataOutputStream.h
-file
-
-
-
-
-2018-01-23T16:31:06.000000Z
-e6542698b5622b5fc0b489ed4b2d04b7
-2018-01-23T16:31:06.891741Z
-31001
-lzhang@cn.ufinity.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1147
-
 TopRightMenuModel.h
 file
 
@@ -365,6 +365,40 @@ lzhang@cn.ufinity.com
 
 
 446
+
+DataOutputStream.h
+file
+
+
+
+
+2018-01-23T16:31:06.000000Z
+e6542698b5622b5fc0b489ed4b2d04b7
+2018-01-23T16:31:06.891741Z
+31001
+lzhang@cn.ufinity.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1147
 
 PromotionModel.h
 file
@@ -433,6 +467,40 @@ xuyutang@juicyshare.cc
 
 
 593
+
+BottomMenuModel.h
+file
+
+
+
+
+2018-01-29T10:03:23.000000Z
+b7a34fef4a913443d6c10e90f106ce0e
+2018-01-29T10:03:23.508857Z
+31115
+xuyutang@juicyshare.cc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+499
 
 DataInputStream.m
 file
@@ -604,6 +672,74 @@ xuyutang@juicyshare.cc
 
 310
 
+BottomMenuModel.m
+file
+
+
+
+
+2018-01-29T10:03:23.000000Z
+938951998c9bfe9dbecedb949c393d85
+2018-01-29T10:03:23.508857Z
+31115
+xuyutang@juicyshare.cc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+448
+
+WifiModel.h
+file
+
+
+
+
+2018-02-01T07:37:37.000000Z
+689364f6f0c93fd9771dc6d04d091cc8
+2018-02-01T07:37:37.735613Z
+31328
+xuyutang@juicyshare.cc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+309
+
 DeviceModel.h
 file
 
@@ -671,6 +807,74 @@ lzhang@cn.ufinity.com
 
 
 318
+
+AppSessionResponseModel.h
+file
+
+
+
+
+2018-02-01T03:36:46.000000Z
+f09ec3296b3315d7ecf2aa248a0338d8
+2018-02-01T03:36:46.042735Z
+31312
+xuyutang@juicyshare.cc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+451
+
+WifiModel.m
+file
+
+
+
+
+2018-02-01T07:37:37.000000Z
+5f74f9a75154eff21f91765b66346991
+2018-02-01T07:37:37.735613Z
+31328
+xuyutang@juicyshare.cc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+197
 
 DeviceModel.m
 file

@@ -1,15 +1,15 @@
 10
 
 dir
-31046
+31448
 http://xuyutang%40juicyshare.cc@svn.juicyshare.cc/repo/winetone/trunk/telecom/ios_hybridapp/HybridApp/Resource/Assets.xcassets/LaunchImage.launchimage
 http://xuyutang%40juicyshare.cc@svn.juicyshare.cc/repo/winetone
 
 
 
-2018-01-24T08:22:28.046064Z
-31020
-xuyutang@juicyshare.cc
+2018-02-03T03:58:20.061216Z
+31374
+lzhang@cn.ufinity.com
 
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2018-01-22T17:50:30.000000Z
-e48ac7ce950eb8fc2270be5be74ac312
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-03T03:58:20.000000Z
+a7c10525418f748a68294fb397000b6c
+2018-02-03T03:58:20.061216Z
+31374
 lzhang@cn.ufinity.com
 has-props
 
@@ -58,7 +58,7 @@ has-props
 
 
 
-10847
+14453
 
 Contents.json
 file
@@ -100,10 +100,10 @@ file
 
 
 
-2018-01-22T17:50:30.000000Z
-e48ac7ce950eb8fc2270be5be74ac312
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-03T03:58:20.000000Z
+819d8642bf8488ba5ce62e92cfba9ac0
+2018-02-03T03:58:20.061216Z
+31374
 lzhang@cn.ufinity.com
 has-props
 
@@ -126,7 +126,7 @@ has-props
 
 
 
-10847
+14453
 
 iPhone-X.jpg
 file
@@ -134,11 +134,11 @@ file
 
 
 
-2018-01-24T08:22:28.000000Z
-a5f9e4b678eb0d5d5a43056ad952fa2f
-2018-01-24T08:22:28.046064Z
-31020
-xuyutang@juicyshare.cc
+2018-02-03T03:58:20.000000Z
+d9766107464dc7b3fc64657359c1612d
+2018-02-03T03:58:20.061216Z
+31374
+lzhang@cn.ufinity.com
 has-props
 
 
@@ -160,7 +160,7 @@ has-props
 
 
 
-103305
+60781
 
 LaunchImage-800-667h@2x.png
 file
@@ -168,10 +168,10 @@ file
 
 
 
-2018-01-22T17:50:30.000000Z
-cd5133e8a352b2738f27edf3cab4ed74
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-03T03:58:20.000000Z
+6ad3c5d2b5e518d177f61d51683aaae9
+2018-02-03T03:58:20.061216Z
+31374
 lzhang@cn.ufinity.com
 has-props
 
@@ -194,7 +194,7 @@ has-props
 
 
 
-12357
+15761
 
 LaunchImage@2x.png
 file
@@ -202,10 +202,10 @@ file
 
 
 
-2018-01-22T17:50:30.000000Z
-ebecff8953e9ada95f950c22b0719206
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-03T03:58:20.000000Z
+7f509a65f3f9648ec2ddbb2603b09d6f
+2018-02-03T03:58:20.061216Z
+31374
 lzhang@cn.ufinity.com
 has-props
 
@@ -228,7 +228,7 @@ has-props
 
 
 
-10168
+16930
 
 LaunchImage-700@2x.png
 file
@@ -236,10 +236,10 @@ file
 
 
 
-2018-01-22T17:50:30.000000Z
-ebecff8953e9ada95f950c22b0719206
-2018-01-22T17:50:30.787855Z
-30947
+2018-02-03T03:58:20.000000Z
+74c86e50854725bfb5148844f0636c29
+2018-02-03T03:58:20.061216Z
+31374
 lzhang@cn.ufinity.com
 has-props
 
@@ -262,5 +262,5 @@ has-props
 
 
 
-10168
+16930
 

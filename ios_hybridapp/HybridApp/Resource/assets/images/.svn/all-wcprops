@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 90
-/repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Resource/assets/images
+/repo/winetone/!svn/ver/31186/trunk/telecom/ios_hybridapp/HybridApp/Resource/assets/images
 END
 setting.png
 K 25
@@ -14,6 +14,12 @@ K 25
 svn:wc:ra_dav:version-url
 V 97
 /repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Resource/assets/images/1_.png
+END
+manag_on.png
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/repo/winetone/!svn/ver/31186/trunk/telecom/ios_hybridapp/HybridApp/Resource/assets/images/manag_on.png
 END
 1.png
 K 25
@@ -39,11 +45,29 @@ svn:wc:ra_dav:version-url
 V 96
 /repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Resource/assets/images/2.png
 END
+manag.png
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/repo/winetone/!svn/ver/31186/trunk/telecom/ios_hybridapp/HybridApp/Resource/assets/images/manag.png
+END
+add_on.png
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/repo/winetone/!svn/ver/31186/trunk/telecom/ios_hybridapp/HybridApp/Resource/assets/images/add_on.png
+END
 menu.png
 K 25
 svn:wc:ra_dav:version-url
 V 99
 /repo/winetone/!svn/ver/30947/trunk/telecom/ios_hybridapp/HybridApp/Resource/assets/images/menu.png
+END
+add.png
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/repo/winetone/!svn/ver/31186/trunk/telecom/ios_hybridapp/HybridApp/Resource/assets/images/add.png
 END
 img.jpg
 K 25
